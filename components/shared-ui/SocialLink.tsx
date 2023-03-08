@@ -1,5 +1,5 @@
 export default function SocialLink() {
   return (
-    <div>SocialLink</div>
+    <div>Social Links</div>
   )
 }

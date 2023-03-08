@@ -1,9 +1,8 @@
-import Head from 'next/head'
 import Header from '@/components/Header'
 import Footer from '@/components/Footer'
 import CallToAction from '@/components/shared-ui/CallToAction'
+import Review from '@/components/Review'
 import Image from 'next/image'
-import styles from '@/styles/Home.module.css'
 
 export default function Home() {
   return (
@@ -102,8 +101,16 @@ function About() {
 
 function Reviews() {
   return (
-    <section className='w-4/6 bg-indigo-400 h-screen'>
+    <section className='h-screen w-4/6 flex flex-col bg-indigo-400 '>
       <h4 className='h-1/6 flex justify-center items-center text-3xl font-semibold'>Reviews</h4>
+      <div className='w-full h-fit flex flex-col justify-start items-center bg-slate-400'>
+        {[1, 2, 3].map(i => (
+          <Review />
+        ))}
+      </div>
+      <div className='w-full flex flex-1 flex-col justify-center items-center bg-sky-600'>
+        See more reviews!  {/* make this a link */}
+      </div>
     </section>
   )
 }
