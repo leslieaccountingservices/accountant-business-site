@@ -70,20 +70,30 @@ function Services() {
 
 function About() {
   return (
-    <section className='w-4/6 bg-green-400 h-screen'>
-      <h3 className='w-full flex justify-center items-center'>About Us</h3>
-      <div>
-        <section className='w-5/6 h/5/6'>
-          <img src="/static/images/accountant.jpeg" alt="accounting stock image" />
-          <div>
-
+    <section className='w-4/6 bg-green-400 h-screen flex flex-col justify-center items-center'>
+      <h3 className='h-1/6 flex justify-center items-center text-3xl font-semibold'>About Us</h3>
+      <div className='w-full h-5/6 flex flex-col justify-center items-center bg-slate-400'>
+        <section className='w-5/6 h-3/6 bg-yellow-100 flex '>
+          <div className='h-full w-3/6 flex justify-center items-center bg-sky-700'>
+            <div className='w-5/6 h-4/6 bg-white'>
+              {/* <Image fill src="/static/images/accountant.jpeg" alt="accounting stock image" /> */}
+            </div>
           </div>
-        </section>
-        <section className='w-5/6 h/5/6'>
-          <div>
-
+          <div className='h-full w-3/6 bg-red-700 flex flex-col justify-center items-center'>
+            <h4 className='w-full text-center'>About Leslie</h4>
+            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ratione quod aliquam omnis corrupti itaque, architecto laborum fugiat, cumque reprehenderit mollitia assumenda sed ullam repellat culpa necessitatibus voluptatum explicabo quo amet.</p>
           </div>
-          <img src="/static/images/charity" alt="charity stock image" />
+        </section >
+        <section className='w-5/6 h-3/6 bg-orange-100 flex'>
+          <div className='h-full w-3/6 bg-red-700 flex flex-col justify-center items-center'>
+            <h4 className='w-full text-center'>Giving Back</h4>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Et dolore dolorem neque nostrum molestias, esse quibusdam facilis sunt dignissimos doloribus impedit vitae, sapiente nam, quos error delectus harum reiciendis nesciunt!</p>
+          </div>
+          <div  className='h-full w-3/6 flex justify-center items-center bg-sky-700'>
+            <div  className='w-5/6 h-4/6 bg-white'>
+              {/* <Image fill src="/static/images/charity.jpeg" alt="charity stock image" /> */}
+            </div>
+          </div>
         </section>
       </div>
     </section>
@@ -93,7 +103,7 @@ function About() {
 function Reviews() {
   return (
     <section className='w-4/6 bg-indigo-400 h-screen'>
-      Reviews
+      <h4 className='h-1/6 flex justify-center items-center text-3xl font-semibold'>Reviews</h4>
     </section>
   )
 }
@@ -101,7 +111,7 @@ function Reviews() {
 function UserQualifier() {
   return (
     <section className='w-4/6 bg-purple-400 h-screen'>
-      User Qualifier
+      <h4 className='h-1/6 flex justify-center items-center text-3xl font-semibold'>User Qualifier</h4>
     </section>
   )
 }
