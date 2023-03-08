@@ -71,19 +71,19 @@ function Services() {
 function About() {
   return (
     <section className='w-4/6 bg-green-400 h-screen'>
-      <h3>About Us</h3>
+      <h3 className='w-full flex justify-center items-center'>About Us</h3>
       <div>
-        <section>
-          <img src="" alt="" />
+        <section className='w-5/6 h/5/6'>
+          <img src="/static/images/accountant.jpeg" alt="accounting stock image" />
           <div>
 
           </div>
         </section>
-        <section>
+        <section className='w-5/6 h/5/6'>
           <div>
 
           </div>
-          <img src="" alt="" />
+          <img src="/static/images/charity" alt="charity stock image" />
         </section>
       </div>
     </section>
