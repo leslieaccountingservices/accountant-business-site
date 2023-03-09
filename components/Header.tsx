@@ -3,7 +3,7 @@ import SocialLink from "./shared-ui/SocialLink"
 
 export default function Header() {
     return (
-        <header className="fixed h-16 w-full px-8 flex justify-around items-center bg-red-300">
+        <header className="fixed h-16 w-full px-8 flex justify-around items-center bg-red-300 z-10">
             <nav>
                 <SocialLink />
             </nav>
