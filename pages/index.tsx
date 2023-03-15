@@ -7,7 +7,7 @@ import Image from 'next/image'
 export default function Home() {
   return (
     <div className="h-fit">
-      <Header />
+      <Header page="home" />
       <main className='w-full h-fit flex flex-col items-center bg-slate-500 pt-16'>
         <Intro />
         <Services />

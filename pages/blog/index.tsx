@@ -8,7 +8,7 @@ export default function Blog() {
     return (
         <>
             <MetaTags title="Blog" description="Leslie's Accounting Services Blog" pageUrl="localhost:3000/blog" imgUrl="/static/images/charity.jpeg" />
-            <Header />
+            <Header page="blog" />
             <main className="w-full flex flex-col justify-center items-center h-fit pt-16 bg-cyan-100 z-0">
                 <div className="w-4/6 min-h-screen flex flex-row bg-slate-200">
                     <Categories />
@@ -37,7 +37,7 @@ function Posts() {
             <h3 className="flex self-start text-3xl font-extralight ml-6">Blog</h3>
             <section className="w-full flex flex-1 flex-col content-around pl-6 pt-3 bg-green-500">
                 {[1, 2, 3, 4, 5].map(i => (
-                    <BlogLink />
+                    <BlogLink key={i}/>
                 ))}
             </section>
             <nav className="w-full h-20 absolute bottom-0 bg-green-400">
