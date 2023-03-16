@@ -1,4 +1,4 @@
-import Header from '@/components/Header'
+import Header from '../components/Header'
 import Footer from '@/components/Footer'
 import CallToAction from '@/components/shared-ui/CallToAction'
 import Review from '@/components/Review'
@@ -105,7 +105,7 @@ function Reviews() {
       <h4 className='h-1/6 flex justify-center items-center text-3xl font-semibold'>Reviews</h4>
       <div className='w-full h-fit flex flex-col justify-start items-center bg-slate-400'>
         {[1, 2, 3].map(i => (
-          <Review />
+          <Review key={i} />
         ))}
       </div>
       <div className='w-full flex flex-1 flex-col justify-center items-center bg-sky-600'>
