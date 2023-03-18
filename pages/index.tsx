@@ -27,7 +27,7 @@ function Intro() {
         <div className='w-5/6 h-fit bg-violet-200'>
           <h3 className='text-6xl antialiased font-extrabold'>Accounting you can count on</h3>
           <p className='text-2xl leading-loose'>Get started with a free consultation!</p>
-          <CallToAction actionText='Book Now!' action={() => { console.log("callToAction pressed!")}} />
+          <CallToAction actionText='Book Now!' action={() => { console.log("callToAction pressed!")}} type="primary" />
         </div>
       </div>
       <div className="w-3/6 bg-cyan-300 flex justify-center items-center">
