@@ -1,5 +1,5 @@
 import Link from "next/link"
-import { Entry } from "@/pages/blog/index"
+import { Entry } from "@/lib/contentful"
 
 export default function BlogLink({ entry }: { entry: Entry}) {
   return (
