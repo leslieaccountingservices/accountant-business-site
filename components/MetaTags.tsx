@@ -4,7 +4,7 @@ export default function MetaTags({ title, description, pageUrl, imgUrl }: { titl
   return (
     <Head>
         {/* <!-- Primary Meta Tags --> */}
-        <title>Meta Tags — Preview, Edit and Generate</title>
+        <title>{title}</title>
         <meta name="title" content={title} />
         <meta name="description" content={description} />
 
