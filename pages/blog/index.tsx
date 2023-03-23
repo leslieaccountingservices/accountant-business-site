@@ -6,9 +6,10 @@ import Footer from "@/components/Footer";
 import { GetServerSideProps } from "next";
 import { Entry, getPosts } from "@/lib/contentful"
 import { useEffect, useState } from "react";
+import CallToAction from "@/components/shared-ui/CallToAction";
 
 export async function getServerSideProps(context: any) {
-    const entries = await getPosts(0);
+    const entries = await getPosts(10, 0);
 
     return {
         props: {
@@ -74,7 +75,7 @@ function Posts({ entries }: { entries: Entry[] }) {
             </section>
             <Loader show={loading} />
             <nav className="w-full h-20 absolute bottom-0 bg-green-400">
-                <button disabled={end} onClick={getMorePosts}>{end ? "More posts coming soon!" : "Get more posts!"}</button>
+                <CallToAction disabled={end} actionText={end ? "More posts coming soon!" : "Get more posts!"} action={getMorePosts} type="secondary" />
             </nav>
         </section>
     )

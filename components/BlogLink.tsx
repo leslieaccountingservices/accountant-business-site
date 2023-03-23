@@ -4,7 +4,7 @@ import { Entry } from "@/lib/contentful"
 export default function BlogLink({ entry }: { entry: Entry}) {
   return (
     <Link className="w-80 h-96 m-12 bg-slate-500"
-    href={`/blog/${entry.slug}`}>
+    href={`/blog/${entry.id}`}>
         <div>
           {entry.title}
         </div>

@@ -7,7 +7,7 @@ export default function Header({ page }: { page: string}) {
             <nav>
                 <SocialLink />
             </nav>
-            <h1 className="flex flex-1 justify-center text-center">Leslie's Accounting Services</h1>
+            <h1 className="flex flex-1 justify-center text-center bg-orange-300">Leslie's Accounting Services</h1>
             {page === "home" ? 
             <Link data-testid="headerLink" href="/blog">
                 <span className="">Blog</span>
