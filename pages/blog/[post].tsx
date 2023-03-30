@@ -1,12 +1,14 @@
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
-import { getPosts, getPost } from "@/lib/contentful";
+import { getPaths, getPost } from "@/lib/contentful";
 
 export async function getStaticPaths() {
-    const paths = await getPosts(0, 0, "getStaticPaths");
+    const paths = await getPaths();
+
+    console.log(paths);
 
     return {
-        paths: paths,
+        paths,
         fallback: 'blocking'
     }
 }

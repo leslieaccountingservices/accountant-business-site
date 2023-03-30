@@ -8,7 +8,7 @@ import { Entry, getPosts } from "@/lib/contentful"
 import { useEffect, useState } from "react";
 import CallToAction from "@/components/shared-ui/CallToAction";
 
-export async function getServerSideProps(context: any) {
+export const getServerSideProps: GetServerSideProps = async () => {
     const entries = await getPosts(10, 0);
 
     return {
@@ -43,7 +43,7 @@ function Posts({ entries }: { entries: Entry[] }) {
     const getMorePosts = async () => {
         setLoading(true);
 
-        const newPosts = await getPosts(skip);
+        const newPosts = await getPosts(10, skip);
 
         if (newPosts.length === 0) {
             setEnd(true);

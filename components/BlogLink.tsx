@@ -7,6 +7,8 @@ export default function BlogLink({ entry }: { entry: Entry}) {
     href={`/blog/${entry.id}`}>
         <div>
           {entry.title}
+          <br />
+          {entry.id}
         </div>
     </Link>
   )
