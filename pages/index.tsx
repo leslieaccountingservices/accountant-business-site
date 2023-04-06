@@ -6,12 +6,12 @@ import Image from 'next/image'
 
 export default function Home() {
   return (
-    <div className="h-fit">
+    <div className="h-fit bg-main">
       <Header page="home" />
-      <main className='w-full h-fit flex flex-col items-center bg-slate-500 pt-16'>
+      <main className='w-full h-fit flex flex-col items-center pt-16'>
         <Intro />
-        <Services />
         <About />
+        <Services />
         <Reviews />
         <UserQualifier />
       </main>
@@ -21,16 +21,16 @@ export default function Home() {
 }
 
 function Intro() {
-  return(
-    <section className='w-4/6 h-screen flex flex-row bg-gray-400'>
-      <div className="w-3/6 flex justify-center items-center bg-purple-300">
-        <div className='w-5/6 h-fit bg-violet-200'>
+  return (
+    <section className='w-4/6 h-screen flex flex-row'>
+      <div className="w-3/6 flex justify-center items-center">
+        <div className='w-5/6 h-fit'>
           <h3 className='text-6xl antialiased font-extrabold'>Accounting you can count on</h3>
           <p className='text-2xl leading-loose'>Get started with a free consultation!</p>
           <CallToAction actionText='Book Now!' action={() => { console.log("callToAction pressed!")}} type="primary" disabled={false} />
         </div>
       </div>
-      <div className="w-3/6 bg-cyan-300 flex justify-center items-center">
+      <div className="w-3/6 flex justify-center items-center">
         <img className="max-w-5/6 h-auto" src="/static/images/10x8-wide-example.jpeg" alt="image of Leslie Garcia" />
       </div>
     </section>

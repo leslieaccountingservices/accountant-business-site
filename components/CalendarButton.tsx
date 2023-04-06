@@ -1,4 +1,4 @@
-import Cal, { getCalApi } from "@calcom/embed-react";
+import { getCalApi } from "@calcom/embed-react";
 import { useEffect } from "react";
 
 export default function CalendarButton() {
@@ -8,5 +8,5 @@ export default function CalendarButton() {
       cal("ui", {"styles":{"branding":{"brandColor":"#02c5a9"}},"hideEventTypeDetails":false});
     })();
   }, [])
-  return <button data-cal-link="rcabrera1">Test</button>;
+  return <button className="h-8 min-w-fit w-16 bg-slate-300 rounded-md ring ring-cta ring-offset-2" data-cal-link="rcabrera1">Test</button>;
 };
