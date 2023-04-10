@@ -25,7 +25,6 @@ export default function Home() {
         <Reviews />
         <UserQualifier />
       </main> */}
-      <Footer />
     </>
   )
 }
@@ -39,7 +38,7 @@ function Banner() {
           <div className='h-3/6 w-4/6 flex flex-row'>
             <div className='h-full w-1/3 border-r border-black flex flex-col justify-center items-center'>
               <CalendarButton />
-              <button className=''>Learn more</button>
+              <button className='h-10 min-w-fit w-48 bg-myorange px-1 mt-2 text-bone border rounded-md shadow-md hover:animate-pulse'>Learn more</button>
             </div>
             <div className='h-full w-2/3 flex flex-col justify-center'>
               <h1 className='text-4xl font-light ml-4 my-4 text-white'>Accounting you can count on</h1>
@@ -63,6 +62,7 @@ function Main() {
         <About />
         <Services />
         <Reviews />
+        <Footer />
       </div>
     </div>
   )
@@ -90,46 +90,57 @@ function Appeal() {
   )
 }
 
-function Intro() {
-  return (
-    <section className='w-4/6 h-screen flex flex-row'>
-      <div className="w-3/6 flex justify-center items-center">
-        <div className='w-5/6 h-fit'>
-          <h3 className='text-6xl antialiased font-extrabold'>Accounting you can count on</h3>
-          <p className='text-2xl leading-loose'>Get started with a free consultation!</p>
-          <CallToAction actionText='Book Now!' action={() => { console.log("callToAction pressed!")}} type="primary" disabled={false} />
-        </div>
-      </div>
-      <div className="w-3/6 flex justify-center items-center">
-        <img className="max-w-5/6 h-auto" src="/static/images/10x8-wide-example.jpeg" alt="image of Leslie Garcia" />
-      </div>
-    </section>
-  )
-}
 
 function Services() {
   return (
     <section className='w-full h-screen'>
       <h3 className='w-full h-24 flex justify-center items-center text-3xl font-light'>Services</h3>
       <div className='w-full h-5/6 flex justify-around items-center'>
-        <section className='w-80 h-5/6 bg-opacity-10 border border-navy bg-navy shadow-md rounded-md'>
+        <section className='w-80 h-5/6 border border-forest bg-bone shadow-md rounded-md'>
           <h4 className='w-full text-center text-navy text-xl font-semibold'>Compliance</h4>
-          <ul className='text-white'>
-            <li></li>
+          <ul className='mt-10 ml-8 text-black list-disc flex flex-col justify-between'>
+            <li className='my-2'>Corporate Taxes</li>
+            <li className='my-2'>Business Taxes</li>
+            <li className='my-2'>Personal Taxes</li>
+            <li className='my-2'>Local Sales Tax</li>
+            <li className='my-2'>Legally Required Corporate Documentation</li>
           </ul>
         </section>
 
-        <section className='w-80 h-5/6 bg-opacity-10 border border-navy bg-navy shadow-md rounded-md'>
+        <section className='w-80 h-5/6 border border-forest bg-bone shadow-md rounded-md'>
           <h4 className='w-full text-center text-navy text-xl font-semibold'>Management</h4>
-          <ul className='text-white'>
-
+          <ul className='mt-10 ml-8 text-black list-disc flex flex-col justify-between'>
+            <li className='my-2'>Bookkeeping
+              <ul className='list-square ml-8 mr-4 my-1'>
+                <li>Manage daily transactions</li>
+              </ul>
+            </li>
+            <li className='my-2'>Payroll
+              <ul className='list-square ml-8 mr-4 my-1'>
+                <li>Management of payroll and taxes</li>
+              </ul>
+            </li>
+            <li className='my-2'>Planning
+              <ul className='list-square ml-8 mr-4 my-1'>
+                <li>Reporting and advice to <span className='text-forest font-bold'>support growth</span></li>
+              </ul>
+            </li>
           </ul>
         </section>
 
-        <section className='w-80 h-5/6 bg-opacity-10 border border-navy bg-navy shadow-md rounded-md'>
+        <section className='w-80 h-5/6 border border-forest bg-bone shadow-md rounded-md'>
           <h4 className='w-full text-center text-navy text-xl font-semibold'>Advisory</h4>
-          <ul className='text-white'>
-
+          <ul className='mt-10 ml-8 text-black list-disc flex flex-col justify-between'>
+            <li className='my-2'>Reporting
+              <ul className='list-square ml-8 mr-4 my-1'>
+                <li>Help directors make informed finance and <span className='text-forest font-bold'>accounting decisions</span></li>
+              </ul>
+            </li>
+            <li className='my-2'>Quick Books Training
+              <ul className='list-square ml-8 mr-4 my-1'>
+                <li><span className='text-forest font-bold'>Training</span> in a one-on-one setting or group setting</li>
+              </ul>
+            </li>
           </ul>
         </section>
       </div>
@@ -171,24 +182,33 @@ function About() {
 
 function Reviews() {
   return (
-    <section className='h-screen w-4/6 flex flex-col bg-indigo-400 '>
-      <h4 className='h-1/6 flex justify-center items-center text-3xl font-semibold'>Reviews</h4>
-      <div className='w-full h-fit flex flex-col justify-start items-center bg-slate-400'>
+    <section className='h-screen w-full flex flex-col bg-white'>
+      <h4 className='w-full h-24 flex justify-center items-center text-3xl font-light'>Reviews</h4>
+      <div className='w-full h-fit flex flex-col justify-start items-center'>
         {[1, 2, 3].map(i => (
           <Review key={i} />
         ))}
       </div>
-      <div className='w-full flex flex-1 flex-col justify-center items-center bg-sky-600'>
+      <div className='w-full flex flex-1 flex-col justify-center items-center'>
         See more reviews!  {/* make this a link */}
       </div>
     </section>
   )
 }
 
-function UserQualifier() {
-  return (
-    <section id="qualifier" className='w-4/6 bg-purple-400 h-screen'>
-      <h4 className='h-1/6 flex justify-center items-center text-3xl font-semibold'>User Qualifier</h4>
-    </section>
-  )
-}
+// function Intro() {
+//   return (
+//     <section className='w-4/6 h-screen flex flex-row'>
+//       <div className="w-3/6 flex justify-center items-center">
+//         <div className='w-5/6 h-fit'>
+//           <h3 className='text-6xl antialiased font-extrabold'>Accounting you can count on</h3>
+//           <p className='text-2xl leading-loose'>Get started with a free consultation!</p>
+//           <CallToAction actionText='Book Now!' action={() => { console.log("callToAction pressed!")}} type="primary" disabled={false} />
+//         </div>
+//       </div>
+//       <div className="w-3/6 flex justify-center items-center">
+//         <img className="max-w-5/6 h-auto" src="/static/images/10x8-wide-example.jpeg" alt="image of Leslie Garcia" />
+//       </div>
+//     </section>
+//   )
+// }

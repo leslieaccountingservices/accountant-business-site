@@ -33,6 +33,11 @@ module.exports = {
         }
       }
     },
+    listStyleType: {
+      roman: 'upper-roman',
+      disc: 'disc',
+      square: 'square'
+    }
   },
   plugins: [],
 }

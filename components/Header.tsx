@@ -7,7 +7,7 @@ import CalendarButton from "./CalendarButton";
 export default function Header({ isHome = false }: { isHome?: boolean }) {
 
     return (
-        <header className="fixed h-16 w-full px-8 flex justify-around items-center bg-forest z-20">
+        <header className="fixed inset-0 h-16 w-full px-8 flex justify-around items-center bg-forest z-20">
             <nav>
                 <Link className="" href={`/`}>
                     <h1 className="text-xl font-extrabold text-white mr-2 italic">
