@@ -2,21 +2,91 @@ import Header from '../components/Header'
 import Footer from '@/components/Footer'
 import CallToAction from '@/components/shared-ui/CallToAction'
 import Review from '@/components/Review'
+import { useState } from 'react'
+import Link from 'next/link'
 import Image from 'next/image'
+import CalendarButton from '@/components/CalendarButton'
+import MetaTags from '@/components/MetaTags'
 
 export default function Home() {
+
+  const [isHome, setIsHome] = useState(true);
+
   return (
-    <div className="h-fit bg-main">
-      <Header page="home" />
-      <main className='w-full h-fit flex flex-col items-center pt-16'>
+    <>
+      <MetaTags title="Leslie's Accounting Services" pageUrl='http://localhost:3000/' imgUrl='/static/images/logo.jpg' description="Leslie's Accounting Services is an accounting firm local to Chicago, and handles accountant matters such as bookkeeping, payroll, financial planning, and personal, business, and corporate taxes." />
+      <Header isHome={isHome} />
+      <Banner />
+      <Main />
+      {/* <main className='w-full h-fit flex flex-col items-center pt-16'>
         <Intro />
         <About />
         <Services />
         <Reviews />
         <UserQualifier />
-      </main>
+      </main> */}
       <Footer />
+    </>
+  )
+}
+
+function Banner() {
+
+  return (
+    <div className='w-full h-screen bg-bone'>
+      <div className='w-full h-5/6 bg-gradient-to-r from-contrast to-forest flex justify-center'>
+        <section className=' h-4/6 w-4/6 flex items-center'>
+          <div className='h-3/6 w-4/6 flex flex-row'>
+            <div className='h-full w-1/3 border-r border-black flex flex-col justify-center items-center'>
+              <CalendarButton />
+              <button className=''>Learn more</button>
+            </div>
+            <div className='h-full w-2/3 flex flex-col justify-center'>
+              <h1 className='text-4xl font-light ml-4 my-4 text-white'>Accounting you can count on</h1>
+              <p className='ml-4 my-4'>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+              <Link className='ml-4 my-2 text-navy underline' href=''>
+                Get started with a free consultation!
+              </Link>
+            </div>
+          </div>
+        </section>
+      </div>
     </div>
+  )
+}
+
+function Main() {
+  return (
+    <div className='z-10 absolute w-full h-fit inset-y-1/2 flex justify-center items-center'>
+      <div className='w-4/6 h-fit bg-bone border shadow-md rounded-md'>
+        <Appeal />
+        <About />
+        <Services />
+        <Reviews />
+      </div>
+    </div>
+  )
+}
+
+function Appeal() {
+  return (
+    <section className='w-full h-fit flex flex-col px-2'>
+      <h3 className='w-full h-24 flex justify-center items-center text-3xl font-light'>Why Leslie's Accounting Services</h3>
+      <div className='flex justify-around'>
+        <section className='w-2/6 h-56  flex flex-col items-center justify-center'>
+          <h4 className='text-navy text-xl font-semibold'>Experience</h4>
+          <p className='text-center text-lg'>With over 8 years of experience serving many different industries, Leslie's Accounting Services is the place to make your money matter.</p>
+        </section>
+        <section className='w-2/6 h-56 flex flex-col items-center justify-center'>
+          <h4 className='text-navy text-xl font-semibold'>Straightforward Pricing</h4>
+          <p className='text-center text-lg'>Here at Leslie's Accounting Services, we believe in tranparency. Here, you'll never run into any hidden fees. Pricing for our various services can be found <Link className='text-navy' href={''}>here</Link>.</p>
+        </section>
+        <section className='w-2/6 h-56 flex flex-col items-center justify-center'>
+          <h4 className='text-navy text-xl font-semibold'>Client-first Service</h4>
+          <p className='text-center text-lg'>Whether it be through exceptional customer service, flexible scheduling, or our competative pricing, you will always come first at Leslie's accounting Services.</p>
+        </section>
+      </div>
+    </section>
   )
 }
 
@@ -39,26 +109,26 @@ function Intro() {
 
 function Services() {
   return (
-    <section className='w-4/6 bg-teal-400 h-screen'>
-      <h3 className='h-1/6 flex justify-center items-center text-3xl font-semibold'>Services</h3>
+    <section className='w-full h-screen'>
+      <h3 className='w-full h-24 flex justify-center items-center text-3xl font-light'>Services</h3>
       <div className='w-full h-5/6 flex justify-around items-center'>
-        <section className='w-80 h-5/6 bg-green-200 rounded-md'>
-          <h4 className='w-full text-center'>Compliance</h4>
-          <ul>
+        <section className='w-80 h-5/6 bg-opacity-10 border border-navy bg-navy shadow-md rounded-md'>
+          <h4 className='w-full text-center text-navy text-xl font-semibold'>Compliance</h4>
+          <ul className='text-white'>
+            <li></li>
+          </ul>
+        </section>
+
+        <section className='w-80 h-5/6 bg-opacity-10 border border-navy bg-navy shadow-md rounded-md'>
+          <h4 className='w-full text-center text-navy text-xl font-semibold'>Management</h4>
+          <ul className='text-white'>
 
           </ul>
         </section>
 
-        <section className='w-80 h-5/6 bg-green-200 rounded-md'>
-          <h4 className='w-full text-center'>Management</h4>
-          <ul>
-
-          </ul>
-        </section>
-
-        <section className='w-80 h-5/6 bg-green-200 rounded-md'>
-          <h4 className='w-full text-center'>Advisory</h4>
-          <ul>
+        <section className='w-80 h-5/6 bg-opacity-10 border border-navy bg-navy shadow-md rounded-md'>
+          <h4 className='w-full text-center text-navy text-xl font-semibold'>Advisory</h4>
+          <ul className='text-white'>
 
           </ul>
         </section>
@@ -69,28 +139,28 @@ function Services() {
 
 function About() {
   return (
-    <section className='w-4/6 bg-green-400 h-screen flex flex-col justify-center items-center'>
-      <h3 className='h-1/6 flex justify-center items-center text-3xl font-semibold'>About Us</h3>
-      <div className='w-full h-5/6 flex flex-col justify-center items-center bg-slate-400'>
-        <section className='w-5/6 h-3/6 bg-yellow-100 flex '>
-          <div className='h-full w-3/6 flex justify-center items-center bg-sky-700'>
-            <div className='w-5/6 h-4/6 bg-white'>
-              {/* <Image fill src="/static/images/accountant.jpeg" alt="accounting stock image" /> */}
+    <section className='bg-white w-full h-screen flex flex-col justify-center items-center'>
+      <h3 className='w-full h-24 flex justify-center items-center text-3xl font-light'>About Us</h3>
+      <div className='w-full h-5/6 flex flex-col justify-center items-center'>
+        <section className='w-5/6 h-3/6 flex '>
+          <div className='h-full w-3/6 flex items-center'>
+            <div className='w-full h-5/6 bg-white relative'>
+              <Image fill src="/static/images/accountant.jpeg" alt="accounting stock image" />
             </div>
           </div>
-          <div className='h-full w-3/6 bg-red-700 flex flex-col justify-center items-center'>
-            <h4 className='w-full text-center'>About Leslie</h4>
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ratione quod aliquam omnis corrupti itaque, architecto laborum fugiat, cumque reprehenderit mollitia assumenda sed ullam repellat culpa necessitatibus voluptatum explicabo quo amet.</p>
+          <div className='h-full w-3/6 flex flex-col justify-center items-center'>
+            <h4 className='w-full text-center text-navy text-xl font-semibold'>About Leslie</h4>
+            <p className='text-sm px-2'> Leslie Garcia  graduated from DeVry University with a bachelors in business administration. She then received her Masters degree from Keller Graduate University in Accounting and Finance. Leslie has successfully helped businesses get started as well as conduct their accounting. She has more than eight years of experience in the industry. She has experience working with all types of businesses such as construction, retail, cafes, attorneys, stores, vendors, payroll, and more.</p>
           </div>
         </section >
-        <section className='w-5/6 h-3/6 bg-orange-100 flex'>
-          <div className='h-full w-3/6 bg-red-700 flex flex-col justify-center items-center'>
-            <h4 className='w-full text-center'>Giving Back</h4>
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Et dolore dolorem neque nostrum molestias, esse quibusdam facilis sunt dignissimos doloribus impedit vitae, sapiente nam, quos error delectus harum reiciendis nesciunt!</p>
+        <section className='w-5/6 h-3/6 flex'>
+          <div className='h-full w-3/6 flex flex-col justify-center items-center'>
+            <h4 className='w-full text-center text-navy text-xl font-semibold'>Giving Back</h4>
+            <p className='text-sm px-2'>Leslie believes in giving back. She is associated board member of HOW (Housing Opportunities for Women). HOW helps find affordable housing for low income women and their children.</p>
           </div>
-          <div  className='h-full w-3/6 flex justify-center items-center bg-sky-700'>
-            <div  className='w-5/6 h-4/6 bg-white'>
-              {/* <Image fill src="/static/images/charity.jpeg" alt="charity stock image" /> */}
+          <div  className='h-full w-3/6 flex justify-center items-center'>
+            <div  className='w-full h-5/6 bg-white relative'>
+              <Image fill src="/static/images/charity.jpeg" alt="charity stock image" />
             </div>
           </div>
         </section>
@@ -117,7 +187,7 @@ function Reviews() {
 
 function UserQualifier() {
   return (
-    <section className='w-4/6 bg-purple-400 h-screen'>
+    <section id="qualifier" className='w-4/6 bg-purple-400 h-screen'>
       <h4 className='h-1/6 flex justify-center items-center text-3xl font-semibold'>User Qualifier</h4>
     </section>
   )

@@ -8,5 +8,5 @@ export default function CalendarButton() {
       cal("ui", {"styles":{"branding":{"brandColor":"#02c5a9"}},"hideEventTypeDetails":false});
     })();
   }, [])
-  return <button className="h-8 min-w-fit w-16 bg-slate-300 rounded-md ring ring-cta ring-offset-2" data-cal-link="rcabrera1">Test</button>;
+  return <button className="h-8 min-w-fit w-16 bg-navy px-1 text-bone rounded-md ring ring-bone shadow-md hover:animate-pulse" data-cal-link="rcabrera1">Free Consultation</button>;
 };

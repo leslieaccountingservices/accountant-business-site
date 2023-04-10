@@ -1,34 +1,48 @@
 import Link from "next/link"
 import Image from "next/image";
 import SocialLink from "./shared-ui/SocialLink"
+import { useContext } from "react";
+import CalendarButton from "./CalendarButton";
 
-export default function Header({ page }: { page: string}) {
+export default function Header({ isHome = false }: { isHome?: boolean }) {
+
     return (
-        <header className="fixed h-16 w-full px-8 flex justify-around items-center bg-forest z-10">
+        <header className="fixed h-16 w-full px-8 flex justify-around items-center bg-forest z-20">
             <nav>
-                <Link className="flex flex-row bg-lim" href={`/`}>
-                    <div className="h-16 w-16 rounded-lg">
-                        <img
-                            src={`/static/images/logo.jpg`}
-                            
-                            alt={`logo image`}
-                        />
-                    </div>
-                    <div>
-                        Leslie's
-                        <br />
-                        Accounting Services
-                    </div>
+                <Link className="" href={`/`}>
+                    <h1 className="text-xl font-extrabold text-white mr-2 italic">
+                        Leslie's Accounting Services
+                    </h1>
                 </Link>
             </nav>
-            <h1 className="flex flex-1 justify-center text-center bg-orange-300">Leslie's Accounting Services</h1>
-            {page === "home" ? 
-            <Link data-testid="headerLink" href="/blog">
-                <span className="">Blog</span>
-            </Link> : 
-            <Link data-testid="headerLink" href="/faq">
-                <span className="">FAQ</span>
-            </Link> }
+            <nav className="h-4/6 flex flex-1 items-center border-l-2">
+                <Link
+                className="text-sm text-white mx-2 underline hover:text-myorange cursor-pointer"
+                href={`/#about`}>
+                    About
+                </Link>
+                <Link
+                className="text-sm text-white mx-2 underline hover:text-myorange cursor-pointer"
+                href={`/#services`}>
+                    Services
+                </Link>
+                <Link
+                className="text-sm text-white mx-2 underline hover:text-myorange cursor-pointer"
+                href={`/#reviews`}>
+                    Reviews
+                </Link>
+                <Link
+                className="text-sm text-white mx-2 underline hover:text-myorange cursor-pointer"
+                href={`/blog`}>
+                    Blog
+                </Link>
+                <Link
+                className="text-sm text-white mx-2 underline hover:text-myorange cursor-pointer"
+                href={`/faq`}>
+                    FAQ
+                </Link>
+            </nav>
+            <CalendarButton />
         </header>
     )
 }
