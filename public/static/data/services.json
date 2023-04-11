@@ -1,0 +1,38 @@
+{
+    "Compliance": [
+        "Corporate Taxes",
+        "Business Taxes",
+        "Personal Taxes",
+        "Local Sales Tax",
+        "Legally Required Corporate Documentation"
+    ],
+    "Management": [
+        {
+            "Bookkeeping": [
+                "Manage daily transactions"
+            ]
+        },
+        {
+            "Payroll": [
+                "Management of payroll and taxes"
+            ]
+        },
+        {
+            "Planning": [
+                "Reporting and advice to support growth"
+            ]
+        }
+    ],
+    "Advisory": [
+        {
+            "Reporting": [
+                "Help directors make informed finance and accounting decisions"
+            ]
+        },
+        {
+            "Quick Books Training": [
+                "Training in a one-on-one setting or group setting"
+            ]
+        }
+    ]
+}

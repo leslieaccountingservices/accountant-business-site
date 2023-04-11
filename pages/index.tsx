@@ -2,22 +2,57 @@ import Header from '../components/Header'
 import Footer from '@/components/Footer'
 import CallToAction from '@/components/shared-ui/CallToAction'
 import Review from '@/components/Review'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
 import CalendarButton from '@/components/CalendarButton'
 import MetaTags from '@/components/MetaTags'
+import { GetStaticProps } from 'next'
+import * as fs from 'fs'
 
-export default function Home() {
+export type IReview = {
+  id: string;
+  imageUrl: string;
+  fName: string;
+  lName: string;
+  rating: number;
+  review: string;
+}
+
+// export type 
+
+export const getStaticProps: GetStaticProps = async () => {
+  var path = require("path");
+
+  const configDirectory = path.resolve(process.cwd(), "public/static/data/");
+
+  const reviews: Array<IReview> = JSON.parse(fs.readFileSync(path.join(configDirectory, "reviews.json"), "utf8")) as Array<IReview>;
+  const services = fs.readFileSync(path.join(configDirectory, "services.json"), "utf8");
+
+  // console.log(`${JSON.stringify(reviews[1])}\n ${typeof reviews}`);
+
+  return {
+    props: {
+      reviews,
+      services
+    }
+  }
+}
+
+export default function Home(props: any) {
 
   const [isHome, setIsHome] = useState(true);
 
+  useEffect(() => {
+    console.log(props.reviews)
+  }, [])
+
   return (
     <>
-      <MetaTags title="Leslie's Accounting Services" pageUrl='http://localhost:3000/' imgUrl='/static/images/logo.jpg' description="Leslie's Accounting Services is an accounting firm local to Chicago, and handles accountant matters such as bookkeeping, payroll, financial planning, and personal, business, and corporate taxes." />
+      <MetaTags title="Leslie's Accounting Services" pageUrl={`${process.env.NEXT_PUBLIC_HOME_URL}`} imgUrl='/static/images/logo.jpg' description="Leslie's Accounting Services is an accounting firm local to Chicago, and handles accountant matters such as bookkeeping, payroll, financial planning, and personal, business, and corporate taxes." />
       <Header isHome={isHome} />
       <Banner />
-      <Main />
+      <Main services={props.services} reviews={props.reviews} />
       {/* <main className='w-full h-fit flex flex-col items-center pt-16'>
         <Intro />
         <About />
@@ -54,14 +89,15 @@ function Banner() {
   )
 }
 
-function Main() {
+function Main({ reviews, services }: { reviews: IReview[], services: any }) {
+
   return (
     <div className='z-10 absolute w-full h-fit inset-y-1/2 flex justify-center items-center'>
       <div className='w-4/6 h-fit bg-bone border shadow-md rounded-md'>
         <Appeal />
         <About />
-        <Services />
-        <Reviews />
+        <Services services={services} />
+        <Reviews reviews={reviews} />
         <Footer />
       </div>
     </div>
@@ -91,7 +127,7 @@ function Appeal() {
 }
 
 
-function Services() {
+function Services({ services }: { services: any}) {
   return (
     <section className='w-full h-screen'>
       <h3 className='w-full h-24 flex justify-center items-center text-3xl font-light'>Services</h3>
@@ -161,7 +197,7 @@ function About() {
           </div>
           <div className='h-full w-3/6 flex flex-col justify-center items-center'>
             <h4 className='w-full text-center text-navy text-xl font-semibold'>About Leslie</h4>
-            <p className='text-sm px-2'> Leslie Garcia  graduated from DeVry University with a bachelors in business administration. She then received her Masters degree from Keller Graduate University in Accounting and Finance. Leslie has successfully helped businesses get started as well as conduct their accounting. She has more than eight years of experience in the industry. She has experience working with all types of businesses such as construction, retail, cafes, attorneys, stores, vendors, payroll, and more.</p>
+            <p className='text-sm px-2'> Leslie Garcia  graduated from DeVry University with a bachelors in business administration. She then received her Masters degree from Keller Graduate University in Accounting and Finance. Leslie has successfully helped businesses get started as well as conduct their accounting. She has more than eight years of experience in the industry. She has experience working with all types of businesses such as construction, retail, food service, attorneys, stores, vendors, payroll, and more.</p>
           </div>
         </section >
         <section className='w-5/6 h-3/6 flex'>
@@ -180,13 +216,13 @@ function About() {
   )
 }
 
-function Reviews() {
+function Reviews({ reviews }: { reviews: IReview[] }) {
   return (
     <section className='h-screen w-full flex flex-col bg-white'>
       <h4 className='w-full h-24 flex justify-center items-center text-3xl font-light'>Reviews</h4>
       <div className='w-full h-fit flex flex-col justify-start items-center'>
-        {[1, 2, 3].map(i => (
-          <Review key={i} />
+        {reviews.map((review: IReview) => (
+          <Review key={review.id} review={review} />
         ))}
       </div>
       <div className='w-full flex flex-1 flex-col justify-center items-center'>
@@ -195,20 +231,3 @@ function Reviews() {
     </section>
   )
 }
-
-// function Intro() {
-//   return (
-//     <section className='w-4/6 h-screen flex flex-row'>
-//       <div className="w-3/6 flex justify-center items-center">
-//         <div className='w-5/6 h-fit'>
-//           <h3 className='text-6xl antialiased font-extrabold'>Accounting you can count on</h3>
-//           <p className='text-2xl leading-loose'>Get started with a free consultation!</p>
-//           <CallToAction actionText='Book Now!' action={() => { console.log("callToAction pressed!")}} type="primary" disabled={false} />
-//         </div>
-//       </div>
-//       <div className="w-3/6 flex justify-center items-center">
-//         <img className="max-w-5/6 h-auto" src="/static/images/10x8-wide-example.jpeg" alt="image of Leslie Garcia" />
-//       </div>
-//     </section>
-//   )
-// }

@@ -43,7 +43,7 @@ export default async function handler(
           type: item.sys.contentType.sys.id,
           title: (item.fields as any).title,
           slug: (item.fields as any).slug,
-          thumbnail: (item.fields as any).thumbnail.fields.file.url,
+          thumbnail: `http:${(item.fields as any).thumbnail.fields.file.url}`,
           headerImage: (item.fields as any).headerImage,
           items: (item.fields as any).items
       }

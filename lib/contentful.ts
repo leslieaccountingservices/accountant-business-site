@@ -14,7 +14,7 @@ export interface Entry {
 }
 
 export async function getPaths() {
-    const res = await fetch("http://localhost:3000/api/contentful/paths");
+    const res = await fetch(`${process.env.NEXT_PUBLIC_HOME_URL}api/contentful/paths`);
     const paths = await res.json();
 
     return paths
@@ -23,7 +23,7 @@ export async function getPaths() {
 export async function getPost(id: string) {
     var res;
     try {
-        res = await fetch(`http://localhost:3000/api/contentful/one-post?id=${id}`);
+        res = await fetch(`${process.env.NEXT_PUBLIC_HOME_URL}api/contentful/one-post?id=${id}`);
 
     } catch (err) {
         console.log(err)
@@ -34,7 +34,7 @@ export async function getPost(id: string) {
 }
 
 export async function getPosts(limit: number, skip: number) {
-    const res = await fetch(`http://localhost:3000/api/contentful/all-posts?limit=${limit}&skip=${skip}`);
+    const res = await fetch(`${process.env.NEXT_PUBLIC_HOME_URL}api/contentful/all-posts?limit=${limit}&skip=${skip}`);
     const posts = await res.json();
 
     return posts

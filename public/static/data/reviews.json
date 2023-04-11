@@ -1,0 +1,26 @@
+[
+    {
+        "id": 1,
+        "imageUrl": "bobthomas.jpeg",
+        "fName": "Bob",
+        "lName": "Thomas",
+        "rating": 4.5,
+        "review": "it was great"
+    },
+    {
+        "id": 2,
+        "imageUrl": "actresses-kirsten-dunst-wallpaper-preview.jpeg",
+        "fName": "Jane",
+        "lName": "Watson",
+        "rating": 5,
+        "review": "it was cool"
+    },
+    {
+        "id": 3,
+        "imageUrl": "Tobey-Maguire.webp",
+        "fName": "Peter",
+        "lName": "Parker",
+        "rating": 5,
+        "review": "it was awesome"
+    }
+]
