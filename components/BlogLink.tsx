@@ -9,7 +9,7 @@ export default function BlogLink({ entry }: { entry: Entry}) {
   }, [])
 
   return (
-    <Link className="w-80 h-96 m-12 rounded-md shadow-lg bg-bone overflow-hidden"
+    <Link className="w-80 h-96 m-12 rounded-md border border-black shadow-lg bg-bone overflow-hidden transition ease-in-out delay-50 hover:scale-110 hover:border-navy duration-300"
     href={`/blog/${entry.id}`}>
         <div className="h-4/6 w-full relative">
           <Image fill alt={entry.title} src={entry.thumbnail} />

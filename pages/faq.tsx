@@ -2,6 +2,7 @@ import Header from "@/components/shared-ui/Header"
 import QandA from "@/components/QandA"
 import * as fs from 'fs'
 import { GetStaticProps } from "next"
+import Footer from "@/components/shared-ui/Footer"
 
 export type TQandA = {
     question: string;
@@ -64,6 +65,7 @@ function Main({ qas }: { qas: Array<TQandA>}) {
                 {qas.map(qa => (
                     <QandA question={qa.question} answer={qa.answer} />
                 ))}
+                <Footer />
             </div>
         </div>
     )

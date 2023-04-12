@@ -11,6 +11,8 @@ import CallToAction from "@/components/shared-ui/CallToAction";
 export const getServerSideProps: GetServerSideProps = async () => {
     const entries = await getPosts(10, 0);
 
+    // const entries: Entry[] = []
+
     return {
         props: {
             entries: entries
@@ -21,16 +23,46 @@ export const getServerSideProps: GetServerSideProps = async () => {
 export default function Blog({ entries }: { entries: Entry[] }) {
     return (
         <>
-            <MetaTags title="Blog" description="Leslie's Accounting Services Blog" pageUrl="localhost:3000/blog" imgUrl="/static/images/charity.jpeg" />
-            <Header page="blog" />
-            <main className="w-full flex flex-col justify-center items-center h-fit pt-16 bg-cyan-100 z-0">
-                <div className="w-4/6 min-h-screen flex flex-row bg-slate-200">
-                    {/* <Categories /> */}
-                    <Posts entries={entries} />
-                </div>
-            </main>
-            <Footer />
+            <MetaTags title="Blog" description="Leslie's Accounting Services Blog" pageUrl={`${process.env.NEXT_PUBLIC_HOME_URL}/blog`} imgUrl="/static/images/charity.jpeg" />
+            <Header />
+            <Banner />
+            <Main entries={entries} />
         </>
+    )
+}
+
+function Banner() {
+    return (
+    <div className='w-full h-screen bg-bone'>
+        <div className='w-full h-5/6 bg-gradient-to-r from-contrast to-forest flex justify-center'>
+            <section className=' h-4/6 w-4/6 flex items-center'>
+                <div className='h-3/6 w-4/6 flex flex-row'>
+                    <div className='h-full w-1/3 border-r border-black flex flex-col justify-center items-center'>
+                    <h4 className="text-8xl">Blog</h4>
+                    </div>
+                    <div className='h-full w-2/3 flex flex-col justify-center'>
+                    <h1 className='text-4xl font-light ml-4 my-4 text-white'>Blog</h1>
+                    <p className='ml-4 my-4'>Our collection of accounting and investment related knowledge</p>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
+    )
+}
+
+function Main({ entries }: { entries: Entry[] }) {
+
+    return (
+        <div className='z-10 absolute w-full h-fit inset-y-1/2 flex flex-col justify-center items-center'>
+            {entries.length > 0 ? 
+            <Posts entries={entries} /> :
+            <div className='w-4/6 h-96 bg-bone border shadow-md rounded-md flex justify-center items-center'>
+                Posts coming soon! :)
+            </div>
+            }
+            <Footer />
+        </div>
     )
 }
 
@@ -42,6 +74,11 @@ function Posts({ entries }: { entries: Entry[] }) {
 
     const getMorePosts = async () => {
         setLoading(true);
+
+        if (end) {
+            setLoading(false);
+            return
+        };
 
         const newPosts = await getPosts(10, skip);
 
@@ -66,17 +103,16 @@ function Posts({ entries }: { entries: Entry[] }) {
     }, [])
 
     return (
-        <section className="h-fit w-full flex flex-col items-center relative bg-orange-300 z-0">
-            <h3 className="text-3xl font-extralight ml-6">Blog</h3>
-            <section className="w-full min-h-5/6 h-fit flex flex-wrap pl-6 pt-3 bg-green-500">
+        <div className='w-4/6 h-fit flex flex-col'>
+            <div className="w-full h-fit flex flex-wrap">
                 {entries.map(entry => (
                     <BlogLink entry={entry} key={entry.id}/>
                 ))}
-            </section>
-            <Loader show={loading} />
-            <nav className="w-full h-20 absolute bottom-0 bg-green-400">
-                <CallToAction disabled={end} actionText={end ? "More posts coming soon!" : "Get more posts!"} action={getMorePosts} type="secondary" />
+                <Loader show={loading} />
+            </div>
+            <nav className="w-full h-20 flex justify-center items-center">
+                <CallToAction disabled={end} actionText={ end ? "More posts coming soon!" : "Get more posts!" } action={getMorePosts} type="secondary" />
             </nav>
-        </section>
+        </div>
     )
 }
