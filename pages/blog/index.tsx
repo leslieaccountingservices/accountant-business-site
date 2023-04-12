@@ -1,8 +1,8 @@
 import MetaTags from "@/components/MetaTags";
 import Loader from "@/components/shared-ui/Loader";
-import Header from "@/components/Header";
+import Header from "@/components/shared-ui/Header";
 import BlogLink from "@/components/BlogLink";
-import Footer from "@/components/Footer";
+import Footer from "@/components/shared-ui/Footer";
 import { GetServerSideProps } from "next";
 import { Entry, getPosts } from "@/lib/contentful"
 import { useEffect, useState } from "react";

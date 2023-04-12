@@ -7,11 +7,13 @@ export default function Review({ review }: { review: IReview }) {
             <div className="h-20 w-20 rounded-full border border-navy bg-cyan-400 relative overflow-hidden">
                 <Image fill src={`/static/images/${review.imageUrl}`} alt={`${review.fName}`} />
             </div>
-            <div className="h-4 w-24 bg-green-400 my-1">
-
+            <div className="h-fit w-fit my-1">
+                <p className="font-semibold text-sm">
+                    {review.fName} <span className="">{review.lName}</span>
+                </p>
             </div>
-            <div className="h-20 w-5/6 bg-blue-400">
-                {review.review} - {review.fName} {review.lName}
+            <div className="h-20 w-5/6 bg-bone shadow-md p-2 border-4 border-navy rounded-md font-light">
+                {review.review}
             </div>
         </div>
     )

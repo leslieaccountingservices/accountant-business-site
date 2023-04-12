@@ -1,4 +1,4 @@
-import SocialLink from "./shared-ui/SocialLink"
+import SocialLink from "./SocialLink"
 
 export default function Footer() {
   return (

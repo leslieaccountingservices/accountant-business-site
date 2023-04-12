@@ -5,7 +5,7 @@
         "fName": "Bob",
         "lName": "Thomas",
         "rating": 4.5,
-        "review": "it was great"
+        "review": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Netus et malesuada fames ac turpis."
     },
     {
         "id": 2,
@@ -13,7 +13,7 @@
         "fName": "Jane",
         "lName": "Watson",
         "rating": 5,
-        "review": "it was cool"
+        "review": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
     },
     {
         "id": 3,
@@ -21,6 +21,6 @@
         "fName": "Peter",
         "lName": "Parker",
         "rating": 5,
-        "review": "it was awesome"
+        "review": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Eget arcu dictum varius duis at consectetur lorem donec."
     }
 ]

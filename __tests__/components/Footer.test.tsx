@@ -1,6 +1,6 @@
 import { render, screen } from '@testing-library/react'
 import '@testing-library/jest-dom'
-import Footer from '@/components/Footer'
+import Footer from '@/components/shared-ui/Footer'
 
 describe('Footer', () => {
     it('renders', () => {

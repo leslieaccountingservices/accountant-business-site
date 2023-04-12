@@ -1,5 +1,5 @@
-import Header from "@/components/Header";
-import Footer from "@/components/Footer";
+import Header from "@/components/shared-ui/Header";
+import Footer from "@/components/shared-ui/Footer";
 import { getPaths, getPost } from "@/lib/contentful";
 
 export async function getStaticPaths() {

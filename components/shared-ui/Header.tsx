@@ -1,6 +1,6 @@
 import Link from "next/link"
 import Image from "next/image";
-import SocialLink from "./shared-ui/SocialLink"
+import SocialLink from "./SocialLink"
 import { useContext } from "react";
 import CalendarButton from "./CalendarButton";
 
