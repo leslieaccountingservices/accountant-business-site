@@ -43,10 +43,6 @@ export default function Home(props: any) {
 
   const [isHome, setIsHome] = useState(true);
 
-  useEffect(() => {
-    console.log(props.reviews)
-  }, [])
-
   return (
     <>
       <MetaTags title="Leslie's Accounting Services" pageUrl={`${process.env.NEXT_PUBLIC_HOME_URL}`} imgUrl='/static/images/logo.jpg' description="Leslie's Accounting Services is an accounting firm local to Chicago, and handles accountant matters such as bookkeeping, payroll, financial planning, and personal, business, and corporate taxes." />

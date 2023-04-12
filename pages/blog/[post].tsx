@@ -5,8 +5,6 @@ import { getPaths, getPost } from "@/lib/contentful";
 export async function getStaticPaths() {
     const paths = await getPaths();
 
-    console.log(paths);
-
     return {
         paths,
         fallback: 'blocking'
@@ -17,7 +15,6 @@ export async function getStaticProps({ params }: { params: any }) {
     const { post } = params;
 
     const blogPost = await getPost(post)
-    console.log(blogPost)
 
     return {
         props: {
@@ -29,7 +26,7 @@ export async function getStaticProps({ params }: { params: any }) {
 export default function Post({ post }: { post: any }) {
     return (
         <>
-            <Header page="post" />
+            <Header />
                 <Article post={post} />
             <Footer />
         </>

@@ -19,6 +19,6 @@ export default async function handler(
         params: { post: item.sys.id }
       }
     })
-    console.log(paths)
+    // console.log(paths)
   res.send(paths)
 }

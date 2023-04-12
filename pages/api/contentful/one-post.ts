@@ -41,8 +41,6 @@ export default async function handler(
         items: (post.fields as any).items
     }
 
-    console.log(formattedPost)
-
 
     return res.json(formattedPost)
 }
