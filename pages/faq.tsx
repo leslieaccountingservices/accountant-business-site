@@ -60,13 +60,13 @@ function Banner() {
 function Main({ qas }: { qas: Array<TQandA>}) {
 
     return (
-        <div className='z-10 absolute w-full h-fit inset-y-1/2 flex justify-center items-center'>
-            <div className='w-4/6 h-fit bg-bone border shadow-md rounded-md pl-8 pr-12 py-8 flex flex-col justify-between'>
+        <div className='z-10 absolute w-full h-fit inset-y-1/2 flex flex-col justify-center items-center'>
+            <div className='w-4/6 h-fit min-h-80 transition ease-in-out duration-300 bg-bone border shadow-md rounded-md pl-8 pr-12 py-8 flex flex-col justify-between'>
                 {qas.map(qa => (
                     <QandA question={qa.question} answer={qa.answer} />
-                ))}
-                <Footer />
+                    ))}
             </div>
+            <Footer />
         </div>
     )
 }

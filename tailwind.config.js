@@ -37,6 +37,9 @@ module.exports = {
       roman: 'upper-roman',
       disc: 'disc',
       square: 'square'
+    },
+    minHeight: {
+      '80': '20rem'
     }
   },
   plugins: [],
