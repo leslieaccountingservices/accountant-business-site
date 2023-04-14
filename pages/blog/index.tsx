@@ -4,14 +4,12 @@ import Header from "@/components/shared-ui/Header";
 import BlogLink from "@/components/BlogLink";
 import Footer from "@/components/shared-ui/Footer";
 import { GetServerSideProps } from "next";
-import { Entry, getPosts } from "@/lib/contentful"
+import { Entry, EntrySummary, getPosts } from "@/lib/contentful"
 import { useEffect, useState } from "react";
 import CallToAction from "@/components/shared-ui/CallToAction";
 
 export const getServerSideProps: GetServerSideProps = async () => {
     const entries = await getPosts(10, 0);
-
-    // const entries: Entry[] = []
 
     return {
         props: {
@@ -58,7 +56,7 @@ function Main({ entries }: { entries: Entry[] }) {
             {entries.length > 0 ? 
             <Posts entries={entries} /> :
             <div className='w-4/6 h-96 bg-bone border shadow-md rounded-md flex justify-center items-center'>
-                Posts coming soon! :)
+                Posts coming soon!
             </div>
             }
             <Footer />
@@ -66,7 +64,7 @@ function Main({ entries }: { entries: Entry[] }) {
     )
 }
 
-function Posts({ entries }: { entries: Entry[] }) {
+function Posts({ entries }: { entries: EntrySummary[] }) {
     const [posts, setPosts] = useState(entries);
     const [skip, setSkip] = useState(10);
     const [loading, setLoading] = useState(false);
@@ -88,8 +86,7 @@ function Posts({ entries }: { entries: Entry[] }) {
             setPosts(posts.concat(newPosts));
             setSkip(skip + 10);
         }
-
-        // console.log(`New Posts: ${JSON.stringify(newPosts)}`);
+        
         setLoading(false)
     }
 

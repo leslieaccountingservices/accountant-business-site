@@ -10,15 +10,20 @@ export interface Entry {
     updatedAt: string;
     type: string;
     title: string;
-    slug: string;
-    thumbnail: any;
     headerImage: any;
-    items: any;
+    body: any;
+}
+export interface EntrySummary {
+    metadata: contentful.Metadata;
+    id: string;
+    createdAt: string;
+    title: string;
+    thumbnail: any;
 }
 
 export default async function handler(
   req: NextApiRequest,
-  res: NextApiResponse<Entry[]>
+  res: NextApiResponse<EntrySummary[]>
 ) {
   const { limit, skip } = req.query;
   
@@ -34,18 +39,15 @@ export default async function handler(
       skip: skip
     })
 
-    let entriesTrimmed: Entry[] = entries.items.map(item => (
+    // console.log(entries)
+
+    let entriesTrimmed: EntrySummary[] = entries.items.map(item => (
       {
           metadata: item.metadata,
           id: item.sys.id,
           createdAt: item.sys.createdAt,
-          updatedAt: item.sys.updatedAt,
-          type: item.sys.contentType.sys.id,
           title: (item.fields as any).title,
-          slug: (item.fields as any).slug,
-          thumbnail: `http:${(item.fields as any).thumbnail.fields.file.url}`,
-          headerImage: (item.fields as any).headerImage,
-          items: (item.fields as any).items
+          thumbnail: `http:${(item.fields as any).thumbnail.fields.file.url}`
       }
     ))
 

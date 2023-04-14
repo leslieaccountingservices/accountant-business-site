@@ -1,9 +1,8 @@
 import Link from "next/link"
 import Image from "next/image"
-import { Entry } from "@/lib/contentful"
-import { useEffect, useState } from "react"
+import { EntrySummary } from "@/lib/contentful"
 
-export default function BlogLink({ entry }: { entry: Entry}) {
+export default function BlogLink({ entry }: { entry: EntrySummary}) {
   // useEffect(() => {
   //   console.log(entry)
   // }, [])

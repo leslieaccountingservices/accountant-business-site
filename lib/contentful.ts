@@ -13,6 +13,14 @@ export interface Entry {
     items: any;
 }
 
+export interface EntrySummary {
+    metadata: contentful.Metadata;
+    id: string;
+    createdAt: string;
+    title: string;
+    thumbnail: any;
+}
+
 export async function getPaths() {
     const res = await fetch(`${process.env.NEXT_PUBLIC_HOME_URL}api/contentful/paths`);
     const paths = await res.json();
@@ -35,7 +43,7 @@ export async function getPost(id: string) {
 
 export async function getPosts(limit: number, skip: number) {
     const res = await fetch(`${process.env.NEXT_PUBLIC_HOME_URL}api/contentful/all-posts?limit=${limit}&skip=${skip}`);
-    const posts = await res.json();
+    const posts: EntrySummary[] = await res.json();
 
     return posts
 }
