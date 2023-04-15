@@ -42,5 +42,7 @@ module.exports = {
       '80': '20rem'
     }
   },
-  plugins: [],
+  plugins: [
+    require('@tailwindcss/typography')
+  ],
 }

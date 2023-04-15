@@ -5,7 +5,7 @@ import { useContext } from "react";
 import CalendarButton from "./CalendarButton";
 
 export default function Header({ isHome = false }: { isHome?: boolean }) {
-
+    // put links under header as new div (for mobile/responsive)
     return (
         <header className="fixed inset-0 h-16 w-full px-8 flex justify-around items-center bg-forest z-20">
             <nav>

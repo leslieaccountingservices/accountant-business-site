@@ -17,7 +17,7 @@ export async function getStaticPaths() {
 export async function getStaticProps({ params }: { params: any }) {
     const { post } = params;
 
-    const blogPost = await getPost(post)
+    const blogPost = await getPost(post);
 
     return {
         props: {
@@ -50,7 +50,6 @@ function Banner({ post }: { post: any }) {
               (max-width: 1200px) 50vw,
               33vw"
             />
-            {/* <p className="mt-36">{`http:${post.headerImage.fields.file.url}`}</p> */}
         </div>
     </div>
     )
@@ -66,7 +65,7 @@ function Article({ post }: { post: any}) {
                 <p className="ml-1 text-xs font-extralight">Written: {createdAt}</p>
                 <p className="ml-1 text-xs font-extralight mb-4">Last update: {updatedAt}</p>
                 <div className="leading-8">
-                    <ReactMarkdown>
+                    <ReactMarkdown className="prose max-w-none prose-img:w-1/2 prose-img:h-auto">
                         {body}
                     </ReactMarkdown>
                 </div>

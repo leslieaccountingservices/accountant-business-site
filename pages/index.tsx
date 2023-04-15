@@ -29,8 +29,6 @@ export const getStaticProps: GetStaticProps = async () => {
   const reviews: Array<IReview> = JSON.parse(fs.readFileSync(path.join(configDirectory, "reviews.json"), "utf8")) as Array<IReview>;
   const services = fs.readFileSync(path.join(configDirectory, "services.json"), "utf8");
 
-  // console.log(`${JSON.stringify(reviews[1])}\n ${typeof reviews}`);
-
   return {
     props: {
       reviews,
@@ -49,13 +47,6 @@ export default function Home(props: any) {
       <Header isHome={isHome} />
       <Banner />
       <Main services={props.services} reviews={props.reviews} />
-      {/* <main className='w-full h-fit flex flex-col items-center pt-16'>
-        <Intro />
-        <About />
-        <Services />
-        <Reviews />
-        <UserQualifier />
-      </main> */}
     </>
   )
 }
@@ -125,7 +116,7 @@ function Appeal() {
 
 function Services({ services }: { services: any}) {
   return (
-    <section className='w-full h-screen'>
+    <section id="services" className='w-full h-screen scroll-mt-16'>
       <h3 className='w-full h-24 flex justify-center items-center text-3xl font-light'>Services</h3>
       <div className='w-full h-5/6 flex justify-around items-center'>
         <section className='w-80 h-5/6 border border-forest bg-bone shadow-md rounded-md'>
@@ -182,7 +173,7 @@ function Services({ services }: { services: any}) {
 
 function About() {
   return (
-    <section className='bg-white w-full h-screen flex flex-col justify-center items-center'>
+    <section id="about" className='bg-white w-full h-screen flex flex-col justify-center items-center scroll-mt-16'>
       <h3 className='w-full h-24 flex justify-center items-center text-3xl font-light'>About Us</h3>
       <div className='w-full h-5/6 flex flex-col justify-center items-center'>
         <section className='w-5/6 h-3/6 flex '>
@@ -214,15 +205,17 @@ function About() {
 
 function Reviews({ reviews }: { reviews: IReview[] }) {
   return (
-    <section className='h-screen w-full flex flex-col bg-white'>
-      <h4 className='w-full h-24 flex justify-center items-center text-3xl font-light'>Reviews</h4>
+    <section id="reviews" className='h-screen w-full flex flex-col bg-white scroll-mt-16'>
+      <h4  className='w-full h-24 flex justify-center items-center text-3xl font-light'>Reviews</h4>
       <div className='w-full h-fit flex flex-col justify-start items-center'>
         {reviews.map((review: IReview) => (
           <Review key={review.id} review={review} />
         ))}
       </div>
       <div className='w-full flex flex-1 flex-col justify-center items-center'>
-        See more reviews!  {/* make this a link */}
+        <Link href={`https://www.facebook.com/lesliesaccountingchicago/reviews`}>
+          See more reviews!
+        </Link>
       </div>
     </section>
   )
