@@ -4,14 +4,14 @@ import '@testing-library/jest-dom'
 
 describe('Header', () => {
     it('renders', () => {
-        render(<Header page="home" />);
+        render(<Header />);
 
         const head = screen.getByRole('banner');
         expect(head).toBeInTheDocument();
     });
 
     it('displays the main title', () => {
-        render(<Header page="home" />);
+        render(<Header  />);
 
         const title = screen.getByRole('heading');
         expect(title).toBeInTheDocument();
@@ -21,7 +21,7 @@ describe('Header', () => {
 
     for (let i = 0; i < types.length; i++) {
         it(`renders the appropriate link for ${types[i]}`, () => {
-            render(<Header page={types[i]} />)
+            render(<Header />)
 
             const link = screen.getByTestId("headerLink");
             expect(link).toBeInTheDocument();

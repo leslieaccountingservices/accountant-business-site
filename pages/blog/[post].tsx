@@ -58,20 +58,20 @@ function Banner({ post }: { post: any }) {
 function Article({ post }: { post: any}) {
     const { createdAt, updatedAt, title, headerImage, body  } = post;
     return (
-        <div className='z-10 absolute w-full h-fit inset-y-1/4 flex justify-center items-center'>
+        <div className='z-10 flex flex-col absolute w-full h-fit inset-y-1/4 justify-center items-center'>
             <div className='w-4/6 h-fit bg-bone border shadow-md rounded-md py-6 px-10'>
                 <h4 className="font-bold text-4xl">{title}</h4>
                 <h5 className="ml-1 ">By Leslie Garcia</h5>
                 <p className="ml-1 text-xs font-extralight">Written: {createdAt}</p>
                 <p className="ml-1 text-xs font-extralight mb-4">Last update: {updatedAt}</p>
                 <div className="leading-8">
-                    <ReactMarkdown className="prose max-w-none prose-img:w-1/2 prose-img:h-auto">
+                    <ReactMarkdown className="prose max-w-none prose-img:w-1/2 prose-img:h-auto prose-img:mx-auto">
                         {body}
                     </ReactMarkdown>
                 </div>
                     
-                
             </div>
+                <Footer />
         </div>
     )
 }

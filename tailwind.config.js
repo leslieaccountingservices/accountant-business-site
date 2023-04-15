@@ -7,15 +7,6 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        primary: {
-          DEFAULT: '#84A98C'
-        },
-        cta: {
-          DEFAULT: '#59C3C3'
-        },
-        main: {
-          DEFAULT: '#EBEBEB'
-        },
         forest: {
           DEFAULT: '#348834'
         },
