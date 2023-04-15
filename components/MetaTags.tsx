@@ -7,6 +7,7 @@ export default function MetaTags({ title, description, pageUrl, imgUrl }: { titl
         <title>{title}</title>
         <meta name="title" content={title} />
         <meta name="description" content={description} />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"></meta>
 
         {/* <!-- Open Graph / Facebook --> */}
         <meta property="og:type" content="website"/>
