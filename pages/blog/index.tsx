@@ -35,12 +35,12 @@ function Banner() {
         <div className='w-full h-5/6 bg-gradient-to-r from-contrast to-forest flex justify-center'>
             <section className=' h-4/6 w-4/6 flex items-center'>
                 <div className='h-3/6 w-4/6 flex flex-row'>
-                    <div className='h-full w-1/3 border-r border-black flex flex-col justify-center items-center'>
-                    <h4 className="text-8xl">Blog</h4>
+                    <div className='h-full w-fit md:w-1/3 border-l md:border-l-0 md:border-r border-black flex flex-col justify-center items-center'>
+                        <h4 className="text-8xl  hidden md:block">Blog</h4>
                     </div>
-                    <div className='h-full w-2/3 flex flex-col justify-center'>
-                    <h1 className='text-4xl font-light ml-4 my-4 text-white'>Blog</h1>
-                    <p className='ml-4 my-4'>Our collection of accounting and investment related knowledge</p>
+                    <div className='h-fit md:h-full w-2/3 flex flex-col justify-center'>
+                        <h1 className='md:text-4xl text-8xl font-light ml-4 my-4 text-white'>Blog</h1>
+                        <p className='ml-4 md:my-4 w-72 md:w-1/2'>Our collection of accounting and investment related knowledge</p>
                     </div>
                 </div>
             </section>
@@ -52,10 +52,10 @@ function Banner() {
 function Main({ entries }: { entries: Entry[] }) {
 
     return (
-        <div className='z-10 absolute w-full h-fit inset-y-1/2 flex flex-col justify-center items-center'>
+        <div className='z-10 absolute w-full h-fit inset-y-96 md:inset-y-1/2 flex flex-col justify-center items-center'>
             {entries.length > 0 ? 
             <Posts entries={entries} /> :
-            <div className='w-4/6 h-96 bg-bone border shadow-md rounded-md flex justify-center items-center'>
+            <div className='w-full md:w-4/6 h-96 bg-bone border shadow-md rounded-md flex justify-center items-center'>
                 Posts coming soon!
             </div>
             }
@@ -100,8 +100,8 @@ function Posts({ entries }: { entries: EntrySummary[] }) {
     }, [])
 
     return (
-        <div className='w-4/6 h-fit flex flex-col'>
-            <div className="w-full h-fit flex flex-wrap">
+        <div className='w-full md:w-4/6 h-fit flex flex-col'>
+            <div className="w-full h-fit flex flex-col items-center md:items-baseline  md:justify-start md:flex-row md:flex-wrap">
                 {entries.map(entry => (
                     <BlogLink entry={entry} key={entry.id}/>
                 ))}

@@ -75,7 +75,7 @@ export default function BlogLink({ entry }: { entry: EntrySummary}) {
   }
 
   return (
-    <Link className="w-80 h-96 m-12 rounded-md border border-black shadow-lg bg-bone overflow-hidden transition ease-in-out delay-50 md:hover:scale-110 md:hover:border-navy duration-300"
+    <Link className="w-2/3 md:w-80 h-96 m-12 rounded-md border border-black shadow-lg bg-bone overflow-hidden transition ease-in-out delay-50 md:hover:scale-110 md:hover:border-navy duration-300"
     href={`/blog/${entry.id}`} target={`_blank`}>
         <div className="h-4/6 w-full relative">
           <Image fill alt={entry.title} src={entry.thumbnail} />
