@@ -105,10 +105,11 @@ function Posts({ entries }: { entries: EntrySummary[] }) {
                 {entries.map(entry => (
                     <BlogLink entry={entry} key={entry.id}/>
                 ))}
-                <Loader show={loading} />
             </div>
             <nav className="w-full h-20 flex justify-center items-center">
-                <CallToAction disabled={end} actionText={ end ? "More posts coming soon!" : "Get more posts!" } action={getMorePosts} type="secondary" />
+                <button className='p-2 w-5/6 min-w bg-white border border-navy rounded-md shadow-lg ring-offset-2 ring-o transition ease-in-out delay-50 md:hover:scale-110 md:hover:bg-navy md:hover:text-white duration-200' onClick={getMorePosts}>
+                    { loading ? <Loader show={true} /> : end ? "More posts coming soon!" : "Get more posts!" }
+                </button>
             </nav>
         </div>
     )
