@@ -4,8 +4,10 @@ export default function Document() {
   return (
     <Html lang="en">
       <Head />
-      <Main />
-      <NextScript />
+      <body className='bg-bone w-full relative'>
+        <Main />
+        <NextScript />
+      </body>
     </Html>
   )
 }
