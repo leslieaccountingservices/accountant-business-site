@@ -1,0 +1,102 @@
+[
+    {
+        "service": {
+            "name": "Monthly Bookkeeping Services",
+            "details": "Pricing depends on the size of the company and the amount of work"
+        },
+        "pricing": {
+            "price": 150,
+            "details": "and up"
+        }
+    },
+    {
+        "service": {
+            "name": "4-hour Quick books training",
+            "details": "one on one or group"
+        },
+        "pricing": {
+            "price": 333,
+            "details": null
+        }
+    },
+    {
+        "service": {
+            "name": "Form 1040 Individuals",
+            "details": null
+        },
+        "pricing": {
+            "price": 150,
+            "details": "and up"
+        }
+    },
+    {
+        "service": {
+            "name": "Form 1040 Schedule C (business)",
+            "details": null
+        },
+        "pricing": {
+            "price": 205,
+            "details": "null"
+        }
+    },
+    {
+        "service": {
+            "name": "Form 1065 (partnership)",
+            "details": null
+        },
+        "pricing": {
+            "price": 435,
+            "details": null
+        }
+    },
+    {
+        "service": {
+            "name": "Form 1120 (corporation)",
+            "details": null
+        },
+        "pricing": {
+            "price": 526,
+            "details": null
+        }
+    },
+    {
+        "service": {
+            "name": "Form 1120S (S corporation)",
+            "details": null
+        },
+        "pricing": {
+            "price": 507,
+            "details": null
+        }
+    },
+    {
+        "service": {
+            "name": "Form 941 / 940",
+            "details": null
+        },
+        "pricing": {
+            "price": 100,
+            "details": "per quarterly return"
+        }
+    },
+    {
+        "service": {
+            "name": "W2 Forms",
+            "details": null
+        },
+        "pricing": {
+            "price": 250,
+            "details": "for up to 5 employees, $20 each additional"
+        }
+    },
+    {
+        "service": {
+            "name": "1099 Forms",
+            "details": null
+        },
+        "pricing": {
+            "price": 250,
+            "details": "for up to 5 employees, $20 each additional"
+        }
+    }
+]

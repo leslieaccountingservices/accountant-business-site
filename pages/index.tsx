@@ -9,7 +9,7 @@ import MetaTags from '@/components/MetaTags'
 import { GetStaticProps } from 'next'
 import * as fs from 'fs'
 
-export type IReview = {
+export interface IReview {
   id: string;
   imageUrl: string;
   fName: string;
@@ -18,20 +18,37 @@ export type IReview = {
   review: string;
 }
 
+export interface Pricing {
+  price: number;
+  details: string | null;
+}
+
+export interface Service {
+  name: string,
+  details: string | null
+}
+
+export interface Prices {
+  service: Service;
+  pricing: Pricing;
+}
+
 // export type 
 
 export const getStaticProps: GetStaticProps = async () => {
   var path = require("path");
+  const dataDirectory = path.resolve(process.cwd(), "public/static/data/");
 
-  const configDirectory = path.resolve(process.cwd(), "public/static/data/");
+  const reviews: Array<IReview> = JSON.parse(fs.readFileSync(path.join(dataDirectory, "reviews.json"), "utf8")) as Array<IReview>;
 
-  const reviews: Array<IReview> = JSON.parse(fs.readFileSync(path.join(configDirectory, "reviews.json"), "utf8")) as Array<IReview>;
-  const services = fs.readFileSync(path.join(configDirectory, "services.json"), "utf8");
+  const pricing: Array<Prices> = JSON.parse(fs.readFileSync(path.join(dataDirectory, "pricing.json"), "utf-8")) as Array<Prices>;
+
+  // console.log(pricing)
 
   return {
     props: {
       reviews,
-      services
+      pricing
     }
   }
 }
@@ -45,7 +62,7 @@ export default function Home(props: any) {
       <MetaTags title="Leslie's Accounting Services" pageUrl={`${process.env.NEXT_PUBLIC_HOME_URL}`} imgUrl='/static/images/logo.jpg' description="Leslie's Accounting Services is an accounting firm local to Chicago, and handles accountant matters such as bookkeeping, payroll, financial planning, and personal, business, and corporate taxes." />
       <Header isHome={isHome} />
       <Banner />
-      <Main services={props.services} reviews={props.reviews} />
+      <Main pricing={props.pricing} reviews={props.reviews} />
     </>
   )
 }
@@ -77,16 +94,17 @@ function Banner() {
   )
 }
 
-function Main({ reviews, services }: { reviews: IReview[], services: any }) {
+function Main({ reviews, pricing }: { reviews: IReview[], pricing: Array<Prices> }) {
 
   return (
     <div className='z-10 absolute w-screen h-fit inset-y-1/2 flex justify-center items-center'>
       <div className='w-screen md:w-4/6 h-fit bg-bone border shadow-md rounded-md'>
         <Appeal />
         <About />
-        <Services services={services} />
+        <Services />
+        <Pricing pricing={pricing} />
         <Reviews reviews={reviews} />
-        <Footer />
+        <Footer isHome />
       </div>
     </div>
   )
@@ -108,64 +126,6 @@ function Appeal() {
         <section className='w-full h-56 flex flex-col items-center justify-center'>
           <h4 className='text-navy text-xl font-semibold'>Client-first Service</h4>
           <p className='text-center text-base xl:text-lg'>Whether it be through exceptional customer service, flexible scheduling, or our competative pricing, you will always come first at Leslie's accounting Services.</p>
-        </section>
-      </div>
-    </section>
-  )
-}
-
-
-function Services({ services }: { services: any}) {
-  return (
-    <section id="services" className='w-full h-fit scroll-mt-16'>
-      <h3 className='w-full h-24 flex justify-center items-center text-3xl font-light'>Services</h3>
-      <div className='w-full h-5/6 flex flex-col md:flex-row justify-around items-center'>
-        <section className='w-5/6 md:w-80 h-5/6 border border-forest bg-bone shadow-md rounded-md mb-4 md:mb-0'>
-          <h4 className='w-full text-center text-navy text-xl font-semibold'>Compliance</h4>
-          <ul className='mt-10 ml-8 text-black list-disc flex flex-col justify-between'>
-            <li className='my-2'>Corporate Taxes</li>
-            <li className='my-2'>Business Taxes</li>
-            <li className='my-2'>Personal Taxes</li>
-            <li className='my-2'>Local Sales Tax</li>
-            <li className='my-2'>Legally Required Corporate Documentation</li>
-          </ul>
-        </section>
-
-        <section className='w-5/6 md:w-80 h-5/6 border border-forest bg-bone shadow-md rounded-md mb-4 md:mb-0'>
-          <h4 className='w-full text-center text-navy text-xl font-semibold'>Management</h4>
-          <ul className='mt-10 ml-8 text-black list-disc flex flex-col justify-between'>
-            <li className='my-2'>Bookkeeping
-              <ul className='list-square ml-8 mr-4 my-1'>
-                <li>Manage daily transactions</li>
-              </ul>
-            </li>
-            <li className='my-2'>Payroll
-              <ul className='list-square ml-8 mr-4 my-1'>
-                <li>Management of payroll and taxes</li>
-              </ul>
-            </li>
-            <li className='my-2'>Planning
-              <ul className='list-square ml-8 mr-4 my-1'>
-                <li>Reporting and advice to <span className='text-forest font-bold'>support growth</span></li>
-              </ul>
-            </li>
-          </ul>
-        </section>
-
-        <section className='w-5/6 md:w-80 h-5/6 border border-forest bg-bone shadow-md rounded-md mb-4 md:mb-0'>
-          <h4 className='w-full text-center text-navy text-xl font-semibold'>Advisory</h4>
-          <ul className='mt-10 ml-8 text-black list-disc flex flex-col justify-between'>
-            <li className='my-2'>Reporting
-              <ul className='list-square ml-8 mr-4 my-1'>
-                <li>Help directors make informed finance and <span className='text-forest font-bold'>accounting decisions</span></li>
-              </ul>
-            </li>
-            <li className='my-2'>Quick Books Training
-              <ul className='list-square ml-8 mr-4 my-1'>
-                <li><span className='text-forest font-bold'>Training</span> in a one-on-one setting or group setting</li>
-              </ul>
-            </li>
-          </ul>
         </section>
       </div>
     </section>
@@ -202,9 +162,92 @@ function About() {
   )
 }
 
+function Services() {
+  return (
+    <section id="services" className='w-full h-fit scroll-mt-16 mb-8'>
+      <h3 className='w-full h-24 flex justify-center items-center text-3xl font-light'>Services</h3>
+      <div className='w-full h-5/6 flex flex-col md:flex-row justify-around items-center'>
+        <section className='w-5/6 md:w-80 h-5/6 border-2 border-forest bg-bone shadow-md rounded-md mb-4 md:mb-0'>
+          <h4 className='w-full text-center text-navy text-xl font-semibold'>Compliance</h4>
+          <ul className='mt-10 ml-8 text-black list-disc flex flex-col justify-between'>
+            <li className='my-2'>Corporate Taxes</li>
+            <li className='my-2'>Business Taxes</li>
+            <li className='my-2'>Personal Taxes</li>
+            <li className='my-2'>Local Sales Tax</li>
+            <li className='my-2'>Legally Required Corporate Documentation</li>
+          </ul>
+        </section>
+
+        <section className='w-5/6 md:w-80 h-5/6 border-2 border-forest bg-bone shadow-md rounded-md mb-4 md:mb-0'>
+          <h4 className='w-full text-center text-navy text-xl font-semibold'>Management</h4>
+          <ul className='mt-10 ml-8 text-black list-disc flex flex-col justify-between'>
+            <li className='my-2'>Bookkeeping
+              <ul className='list-square ml-8 mr-4 my-1'>
+                <li>Manage daily transactions</li>
+              </ul>
+            </li>
+            <li className='my-2'>Payroll
+              <ul className='list-square ml-8 mr-4 my-1'>
+                <li>Management of payroll and taxes</li>
+              </ul>
+            </li>
+            <li className='my-2'>Planning
+              <ul className='list-square ml-8 mr-4 my-1'>
+                <li>Reporting and advice to <span className='text-forest font-bold'>support growth</span></li>
+              </ul>
+            </li>
+          </ul>
+        </section>
+
+        <section className='w-5/6 md:w-80 h-5/6 border-2 border-forest bg-bone shadow-md rounded-md mb-4 md:mb-0'>
+          <h4 className='w-full text-center text-navy text-xl font-semibold'>Advisory</h4>
+          <ul className='mt-10 ml-8 text-black list-disc flex flex-col justify-between'>
+            <li className='my-2'>Reporting
+              <ul className='list-square ml-8 mr-4 my-1'>
+                <li>Help directors make informed finance and <span className='text-forest font-bold'>accounting decisions</span></li>
+              </ul>
+            </li>
+            <li className='my-2'>Quick Books Training
+              <ul className='list-square ml-8 mr-4 my-1'>
+                <li><span className='text-forest font-bold'>Training</span> in a one-on-one setting or group setting</li>
+              </ul>
+            </li>
+          </ul>
+        </section>
+      </div>
+    </section>
+  )
+}
+
+function Pricing({ pricing }: { pricing: Array<Prices> }) {
+
+  return (
+    <div className="h-fit w-full flex flex-col bg-white scroll-mt-16">
+      <h4 className="w-full h-24 flex justify-center items-center text-3xl font-light px-2">Pricing</h4>
+      <div className='flex flex-col h-fit w-full px-2 md:px-16'>
+        {pricing.map((item) => (
+          <div className='my-4 md:my-6 border-t md:border-t-0 md:flex md:justify-between md:w-full'>
+            <div>
+              <h5 className='text-2xl'>{item.service.name}</h5>
+              <p className='text-xs font-light text-navy'>{item.service.details}</p>
+            </div>
+            <div>
+              <p className='text-sm md:text-lg font-light'>${item.pricing.price} {item.pricing.details}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+      <div className='text-center my-6'>
+        <p className='text-sm font-bold'>Know what you're looking for? <Link className='text-navy font-base underline' href=''>Book your appointment now!</Link></p>
+        <p className='text-xs font-extralight'>You will not be charged at this time.</p>
+      </div>
+    </div>
+  )
+}
+
 function Reviews({ reviews }: { reviews: IReview[] }) {
   return (
-    <section id="reviews" className='h-fit w-full flex flex-col bg-white scroll-mt-16'>
+    <section id="reviews" className='h-fit w-full flex flex-col bg-bone scroll-mt-16'>
       <h4  className='w-full h-24 flex justify-center items-center text-3xl font-light'>Reviews</h4>
       <div className='w-full h-fit flex flex-col justify-start items-center'>
         {reviews.map((review: IReview) => (
