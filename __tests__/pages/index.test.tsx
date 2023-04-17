@@ -15,7 +15,7 @@ describe('Home', () => {
     expect(heading).toBeInTheDocument()
   });
 
-  const sections: string[] = ["Accounting you can count on", "Services", "About Us", "Reviews", "User Qualifier"]
+  const sections: string[] = ["Accounting you can count on", "Why Leslie's Accounting Services", "About Us", "Services", "Pricing", "Reviews"]
 
   for (let i = 0; i < sections.length; i++) {
     it(`renders ${sections[i]} section`, () => {

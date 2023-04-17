@@ -1,6 +1,6 @@
 import SocialLink from "./SocialLink"
 
-export default function Footer({ isHome = false }: { isHome: boolean }) {
+export default function Footer({ isHome = false }: { isHome?: boolean }) {
   return (
     <footer className={`flex flex-col items-center py-6 w-full h-fit ${isHome ? "bg-white" : null}`}>
       <nav>
