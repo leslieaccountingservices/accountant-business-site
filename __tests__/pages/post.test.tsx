@@ -28,7 +28,7 @@ beforeEach(() => {
 });
 
 describe("post page", () => {
-    // afterEach(cleanup);
+    afterEach(cleanup);
 
     it("renders itself", () => {
         const postPage = screen.getByTestId("post")
