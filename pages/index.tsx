@@ -60,7 +60,7 @@ export default function Home(props: any) {
   return (
     <>
       <MetaTags title="Leslie's Accounting Services" pageUrl={`${process.env.NEXT_PUBLIC_HOME_URL}`} imgUrl='/static/images/logo.jpg' description="Leslie's Accounting Services is an accounting firm local to Chicago, and handles accountant matters such as bookkeeping, payroll, financial planning, and personal, business, and corporate taxes." />
-      <Header isHome={isHome} />
+      <Header />
       <Banner />
       <Main pricing={props.pricing} reviews={props.reviews} />
     </>
@@ -94,7 +94,7 @@ function Banner() {
   )
 }
 
-function Main({ reviews, pricing }: { reviews: IReview[], pricing: Array<Prices> }) {
+function Main({ reviews = [], pricing = [] }: { reviews: IReview[], pricing: Array<Prices> }) {
 
   return (
     <div className='z-10 absolute w-screen h-fit inset-y-1/2 flex justify-center items-center'>
@@ -226,7 +226,7 @@ function Pricing({ pricing }: { pricing: Array<Prices> }) {
       <h4 className="w-full h-24 flex justify-center items-center text-3xl font-light px-2">Pricing</h4>
       <div className='flex flex-col h-fit w-full px-2 md:px-16'>
         {pricing.map((item) => (
-          <div className='my-4 md:my-6 border-t md:border-t-0 md:flex md:justify-between md:w-full'>
+          <div key={item.service.name} className='my-4 md:my-6 border-t md:border-t-0 md:flex md:justify-between md:w-full'>
             <div>
               <h5 className='text-2xl'>{item.service.name}</h5>
               <p className='text-xs font-light text-navy'>{item.service.details}</p>

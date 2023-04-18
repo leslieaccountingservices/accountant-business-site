@@ -8,6 +8,7 @@ export interface Entry {
     updatedAt: string;
     type: string;
     title: string;
+    description: string;
     headerImage: any;
     body: any;
 }
@@ -33,6 +34,7 @@ export default async function handler(
         updatedAt: post.sys.updatedAt,
         type: post.sys.contentType.sys.id,
         title: (post.fields as any).title,
+        description: (post.fields as any).description,
         thumbnail: (post.fields as any).thumbnail.fields.file.url,
         headerImage: (post.fields as any).headerImage,
         body: (post.fields as any).body

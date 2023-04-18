@@ -2,8 +2,8 @@ import Header from "@/components/shared-ui/Header";
 import Footer from "@/components/shared-ui/Footer";
 import Image from "next/image";
 import { getPaths, getPost } from "@/lib/contentful";
-import { useEffect } from "react";
 import { ReactMarkdown } from "react-markdown/lib/react-markdown";
+import MetaTags from "@/components/MetaTags";
 
 export async function getStaticPaths() {
     const paths = await getPaths();
@@ -29,6 +29,7 @@ export async function getStaticProps({ params }: { params: any }) {
 export default function Post({ post }: { post: any }) {
     return (
         <div className="h-fit">
+            <MetaTags title={post.title} description={post.description} imgUrl={`http:${post.headerImage.fields.file.url}`} pageUrl={`${process.env.NEXT_PUBLIC_HOME_URL}/blog/${post.id}`} />
             <Header />
             <Banner post={post} />
             <Article post={post} />
@@ -38,17 +39,15 @@ export default function Post({ post }: { post: any }) {
 }
 
 function Banner({ post }: { post: any }) {
-    useEffect(() => {
-        console.log(post)
-    }, [])
+
     return (
         <div className='w-full h-screen'>
         <div className='w-full h-5/6 bg-gradient-to-r from-contrast to-forest flex justify-center relative'>
             <Image src={`http:${post.headerImage.fields.file.url}`} alt="header image"
             fill
             sizes="(max-width: 768px) 100vw,
-              (max-width: 1200px) 50vw,
-              33vw"
+                (max-width: 1200px) 50vw,
+                33vw"
             />
         </div>
     </div>
@@ -57,6 +56,7 @@ function Banner({ post }: { post: any }) {
 
 function Article({ post }: { post: any}) {
     const { createdAt, updatedAt, title, body  } = post;
+    
     return (
         <article className='z-10 flex flex-col absolute w-full h-fit inset-y-1/2 md:inset-y-1/4 justify-center items-center'>
             <div className='w-full md:w-4/6 h-fit bg-bone border shadow-md rounded-md py-6 px-10'>

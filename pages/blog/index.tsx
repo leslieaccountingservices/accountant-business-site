@@ -4,7 +4,7 @@ import Header from "@/components/shared-ui/Header";
 import BlogLink from "@/components/BlogLink";
 import Footer from "@/components/shared-ui/Footer";
 import { GetServerSideProps } from "next";
-import { Entry, EntrySummary, getPosts } from "@/lib/contentful"
+import { Entry, EntrySummary, getPosts } from "@/lib/contentful";
 import { useEffect, useState } from "react";
 import CallToAction from "@/components/shared-ui/CallToAction";
 
@@ -18,7 +18,7 @@ export const getServerSideProps: GetServerSideProps = async () => {
     }
 }
 
-export default function Blog({ entries }: { entries: Entry[] }) {
+export default function Blog({ entries = [] }: { entries: Entry[] }) {
     return (
         <>
             <MetaTags title="Blog" description="Leslie's Accounting Services Blog" pageUrl={`${process.env.NEXT_PUBLIC_HOME_URL}/blog`} imgUrl="/static/images/charity.jpeg" />

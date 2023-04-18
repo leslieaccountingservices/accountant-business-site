@@ -17,18 +17,20 @@ describe('Header', () => {
         expect(title).toBeInTheDocument();
     });
 
-    const types: Array<string> = ["home", "blog", "post"];
+    const links: Array<string> = ["home", "about", "services", "reviews", "blog", "faq"];
 
-    for (let i = 0; i < types.length; i++) {
-        it(`renders the appropriate link for ${types[i]}`, () => {
+    for (let i = 0; i < links.length; i++) {
+        it(`renders the appropriate link for ${links[i]}`, () => {
             render(<Header />)
 
-            const link = screen.getByTestId("headerLink");
+            const link = screen.getByTestId(links[i] + "-link");
             expect(link).toBeInTheDocument();
-            if (types[i] === "home") {
-                expect(link).toHaveAttribute('href', "/blog");
+            if (links[i] === "home") {
+                expect(link).toHaveAttribute('href', `/`);
+            } else if (links[i] === "blog" || links[i] === "faq") {
+                expect(link).toHaveAttribute('href', `/${links[i]}`);
             } else {
-                expect(link).toHaveAttribute('href', '/faq')
+                expect(link).toHaveAttribute('href', `/#${links[i]}`)
             }
         })
     };
