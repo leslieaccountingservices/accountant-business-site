@@ -1,10 +1,11 @@
 import { render, screen } from '@testing-library/react'
-import Home from '../../pages/index'
+import Home, { IReview } from '@/pages/index'
 import '@testing-library/jest-dom'
+import { Pricing, Reviews } from '@/pages/index'
 
-const reviews = [
+const reviews: IReview[] = [
     {
-        id: 1,
+        id: "1",
         imageUrl: "bobthomas.jpeg",
         fName: "Bob",
         lName: "Thomas",
@@ -12,7 +13,7 @@ const reviews = [
         review: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Netus et malesuada fames ac turpis."
     },
     {
-        id: 2,
+        id: "2",
         imageUrl: "actresses-kirsten-dunst-wallpaper-preview.jpeg",
         fName: "Jane",
         lName: "Watson",
@@ -20,7 +21,7 @@ const reviews = [
         review: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
     },
     {
-        id: 3,
+        id: "3",
         imageUrl: "Tobey-Maguire.webp",
         fName: "Peter",
         lName: "Parker",
@@ -60,10 +61,6 @@ const prices = [
         }
     }
 ]
-const props = {
-  reviews: prices,
-  pricing: reviews
-}
 
 beforeEach(() => {
   render(<Home />)
@@ -93,4 +90,33 @@ describe('Home', () => {
 
     expect(footer).toBeInTheDocument();
   })
-})
+});
+
+describe('Pricing', () => {
+  it("renders all prices", () => {
+    render(<Pricing pricing={prices} />);
+
+    const price1Indicator = screen.getByText("Monthly Bookkeeping Services");
+    const price2Indicator = screen.getByText("4-hour Quick books training");
+    const price3Indicator = screen.getByText("Form 1040 Individuals");
+
+    expect(price1Indicator).toBeInTheDocument();
+    expect(price2Indicator).toBeInTheDocument();
+    expect(price3Indicator).toBeInTheDocument();
+  });
+});
+
+describe("Reviews", () => {
+  it("renders all reviews", () => {
+    render(<Reviews reviews={reviews} />);
+
+    const review1 = screen.getByText("Bob");
+    const review2 = screen.getByText("Jane");
+    const review3 = screen.getByText("Peter");
+
+    expect(review1).toBeInTheDocument();
+    expect(review2).toBeInTheDocument();
+    expect(review3).toBeInTheDocument();
+    
+  });
+});

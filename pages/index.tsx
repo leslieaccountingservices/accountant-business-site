@@ -219,7 +219,7 @@ function Services() {
   )
 }
 
-function Pricing({ pricing }: { pricing: Array<Prices> }) {
+export function Pricing({ pricing }: { pricing: Array<Prices> }) {
 
   return (
     <div className="h-fit w-full flex flex-col bg-white scroll-mt-16">
@@ -245,7 +245,7 @@ function Pricing({ pricing }: { pricing: Array<Prices> }) {
   )
 }
 
-function Reviews({ reviews }: { reviews: IReview[] }) {
+export function Reviews({ reviews }: { reviews: IReview[] }) {
   return (
     <section id="reviews" className='h-fit w-full flex flex-col bg-bone scroll-mt-16'>
       <h4  className='w-full h-24 flex justify-center items-center text-3xl font-light'>Reviews</h4>

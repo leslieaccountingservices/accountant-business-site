@@ -7,10 +7,9 @@ export interface Entry {
     updatedAt: string;
     type: string;
     title: string;
-    slug: string;
-    thumbnail: any;
+    description: string;
     headerImage: any;
-    items: any;
+    body: any;
 }
 
 export interface EntrySummary {

@@ -18,7 +18,9 @@ const customJestConfig = {
   moduleFileExtensions: ['tsx', 'ts', 'jsx', 'js'],
   moduleNameMapper: {
     '^@/components/(.*)$': '<rootDir>/components/$1',
-    '^@/pages/(.*)$': '<rootDir>/pages/$1'
+    '^@/pages/(.*)$': '<rootDir>/pages/$1',
+    '^@/lib/(.*)$': '<rootDir>/lib/$1',
+    "react-markdown": "<rootDir>/node_modules/react-markdown/react-markdown.min.js"
   }
 }
 

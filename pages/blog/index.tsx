@@ -6,7 +6,6 @@ import Footer from "@/components/shared-ui/Footer";
 import { GetServerSideProps } from "next";
 import { Entry, EntrySummary, getPosts } from "@/lib/contentful";
 import { useEffect, useState } from "react";
-import CallToAction from "@/components/shared-ui/CallToAction";
 
 export const getServerSideProps: GetServerSideProps = async () => {
     const entries = await getPosts(10, 0);
@@ -18,7 +17,7 @@ export const getServerSideProps: GetServerSideProps = async () => {
     }
 }
 
-export default function Blog({ entries = [] }: { entries: Entry[] }) {
+export default function Blog({ entries }: { entries: EntrySummary[] }) {
     return (
         <>
             <MetaTags title="Blog" description="Leslie's Accounting Services Blog" pageUrl={`${process.env.NEXT_PUBLIC_HOME_URL}/blog`} imgUrl="/static/images/charity.jpeg" />
@@ -31,7 +30,7 @@ export default function Blog({ entries = [] }: { entries: Entry[] }) {
 
 function Banner() {
     return (
-    <div className='w-full h-screen bg-bone'>
+    <div data-testid="blog-banner" className='w-full h-screen bg-bone'>
         <div className='w-full h-5/6 bg-gradient-to-r from-contrast to-forest flex justify-center'>
             <section className=' h-4/6 w-4/6 flex items-center'>
                 <div className='h-3/6 w-4/6 flex flex-row'>
@@ -49,10 +48,10 @@ function Banner() {
     )
 }
 
-function Main({ entries }: { entries: Entry[] }) {
+function Main({ entries }: { entries: EntrySummary[] }) {
 
     return (
-        <div className='z-10 absolute w-full h-fit inset-y-96 md:inset-y-1/2 flex flex-col justify-center items-center'>
+        <div data-testid="blog-main" className='z-10 absolute w-full h-fit inset-y-96 md:inset-y-1/2 flex flex-col justify-center items-center'>
             {entries.length > 0 ? 
             <Posts entries={entries} /> :
             <div className='w-full md:w-4/6 h-96 bg-bone border shadow-md rounded-md flex justify-center items-center'>
@@ -64,7 +63,7 @@ function Main({ entries }: { entries: Entry[] }) {
     )
 }
 
-function Posts({ entries }: { entries: EntrySummary[] }) {
+function Posts({ entries = [] }: { entries: EntrySummary[] }) {
     const [posts, setPosts] = useState(entries);
     const [skip, setSkip] = useState(10);
     const [loading, setLoading] = useState(false);
@@ -100,7 +99,7 @@ function Posts({ entries }: { entries: EntrySummary[] }) {
     }, [])
 
     return (
-        <div className='w-full md:w-4/6 h-fit flex flex-col'>
+        <div data-testid="blog-posts" className='w-full md:w-4/6 h-fit flex flex-col'>
             <div className="w-full h-fit flex flex-col items-center md:items-baseline  md:justify-start md:flex-row md:flex-wrap">
                 {entries.map(entry => (
                     <BlogLink entry={entry} key={entry.id}/>

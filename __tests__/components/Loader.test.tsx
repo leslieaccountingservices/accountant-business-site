@@ -9,4 +9,11 @@ describe('Loader', () => {
         const loader = screen.getByRole('status');
         expect(loader).toBeInTheDocument();
     });
+
+    it('does not render a div if show is false', () => {
+        render(<Loader show={false} />);
+
+        const loader = screen.queryByRole('status');
+        expect(loader).not.toBeInTheDocument();
+    })
 })
