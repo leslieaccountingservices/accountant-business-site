@@ -1,5 +1,5 @@
 import { screen, render, cleanup } from "@testing-library/react";
-import { Post } from "@/pages/blog/[post]";
+import Post from "@/pages/blog/[post]";
 import "@testing-library/jest-dom";
 import { Entry } from "@/lib/contentful";
 
@@ -13,6 +13,7 @@ const entry: Entry = {
     type: "a type",
     title: "This is my title",
     description: "This is my description",
+    keywords: "hello, hellno, cool, mane",
     headerImage: {
         fields: {
             file: {
