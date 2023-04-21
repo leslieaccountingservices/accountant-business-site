@@ -25,7 +25,7 @@ export default async function handler(
         title: (post.fields as any).title,
         description: (post.fields as any).description,
         keywords: (post.fields as any).keywords,
-        headerImage: (post.fields as any).headerImage,
+        headerImage: `http:${(post.fields as any).headerImage.fields.file.url}`,
         body: (post.fields as any).body
     }
 

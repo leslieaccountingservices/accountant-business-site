@@ -4,6 +4,7 @@ import Image from "next/image";
 import { Entry, getPaths, getPost } from "@/lib/contentful";
 import ReactMarkdown  from "react-markdown";
 import MetaTags from "@/components/MetaTags";
+import { useEffect } from "react";
 
 export async function getStaticPaths() {
     const paths = await getPaths();
@@ -27,11 +28,14 @@ export async function getStaticProps({ params }: { params: any }) {
 }
 
 function Post({ post }: { post: Entry }) {
+    useEffect(() => {
+        console.log(post.headerImage)
+    })
     return (
         <div data-testid="post" className="h-fit">
-            <MetaTags title={post.title} description={post.description} imgUrl={`http:${post.headerImage.fields.file.url}`} pageUrl={`${process.env.NEXT_PUBLIC_HOME_URL}/blog/${post.id}`} />
+            <MetaTags title={post.title} description={post.description} imgUrl={post.headerImage} pageUrl={`${process.env.NEXT_PUBLIC_HOME_URL}/blog/${post.id}`} />
             <Header />
-            <Banner img={post.headerImage.fields.file.url} />
+            <Banner img={post.headerImage} />
             <Article post={post} />
             <Footer />
         </div>
@@ -43,7 +47,7 @@ function Banner({ img }: { img: any }) {
     return (
         <div data-testid="post-banner" className='w-full h-screen'>
         <div className='w-full h-5/6 bg-gradient-to-r from-contrast to-forest flex justify-center relative'>
-            <Image src={`http:${img}}`} alt="header image"
+            <Image priority src={img} alt="header image"
             fill
             sizes="(max-width: 768px) 100vw,
                 (max-width: 1200px) 50vw,

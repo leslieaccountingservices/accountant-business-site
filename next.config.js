@@ -7,7 +7,7 @@ const nextConfig = {
         protocol: 'http',
         hostname: 'images.ctfassets.net',
         port: '',
-        pathname: '/7w8j0w0gqi9b/**'
+        pathname: `/${process.env.CONTENTFUL_SPACE_ID}/**`
       }
     ]
   }
