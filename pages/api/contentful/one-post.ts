@@ -1,21 +1,10 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
 import * as contentful from 'contentful';
-
-export interface Entry {
-    metadata: contentful.Metadata;
-    id: string;
-    createdAt: string;
-    updatedAt: string;
-    type: string;
-    title: string;
-    description: string;
-    headerImage: any;
-    body: any;
-}
+import { Entry } from '@/lib/contentful';
 
 export default async function handler(
     req: NextApiRequest,
-    res: NextApiResponse<any>) {
+    res: NextApiResponse<Entry>) {
 
     const { id } = req.query;
 
@@ -27,7 +16,7 @@ export default async function handler(
 
     const post = await client.getEntry(id as string);
 
-    const formattedPost = {
+    const formatted: Entry = {
         metadata: post.metadata,
         id: post.sys.id,
         createdAt: post.sys.createdAt,
@@ -35,11 +24,11 @@ export default async function handler(
         type: post.sys.contentType.sys.id,
         title: (post.fields as any).title,
         description: (post.fields as any).description,
-        thumbnail: (post.fields as any).thumbnail.fields.file.url,
+        keywords: (post.fields as any).keywords,
         headerImage: (post.fields as any).headerImage,
         body: (post.fields as any).body
     }
 
 
-    return res.json(formattedPost)
+    return res.json(formatted)
 }
