@@ -1,7 +1,7 @@
 import Header from "@/components/shared-ui/Header";
 import Footer from "@/components/shared-ui/Footer";
 import Image from "next/image";
-import { getPaths, getPost } from "@/lib/contentful";
+import { Entry, getPaths, getPost } from "@/lib/contentful";
 import ReactMarkdown  from "react-markdown";
 import MetaTags from "@/components/MetaTags";
 
@@ -17,7 +17,7 @@ export async function getStaticPaths() {
 export async function getStaticProps({ params }: { params: any }) {
     const { post } = params;
 
-    const blogPost = await getPost(post);
+    const blogPost: Entry = await getPost(post);
 
     return {
         props: {
@@ -26,7 +26,7 @@ export async function getStaticProps({ params }: { params: any }) {
     }
 }
 
-export function Post({ post }: { post: any }) {
+function Post({ post }: { post: Entry }) {
     return (
         <div data-testid="post" className="h-fit">
             <MetaTags title={post.title} description={post.description} imgUrl={`http:${post.headerImage.fields.file.url}`} pageUrl={`${process.env.NEXT_PUBLIC_HOME_URL}/blog/${post.id}`} />
@@ -54,7 +54,7 @@ function Banner({ img }: { img: any }) {
     )
 }
 
-function Article({ post }: { post: any}) {
+function Article({ post }: { post: Entry }) {
     const { createdAt, updatedAt, title, body } = post;
     
     return (
@@ -73,3 +73,5 @@ function Article({ post }: { post: any}) {
         </article>
     )
 }
+
+export default Post;
