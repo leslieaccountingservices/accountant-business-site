@@ -8,6 +8,7 @@ export interface Entry {
     type: string;
     title: string;
     description: string;
+    keywords: string;
     headerImage: any;
     body: any;
 }
@@ -18,6 +19,11 @@ export interface EntrySummary {
     createdAt: string;
     title: string;
     thumbnail: any;
+}
+
+export interface FAQ {
+    question: string;
+    answer: string;
 }
 
 export async function getPaths() {
@@ -33,9 +39,9 @@ export async function getPost(id: string) {
         res = await fetch(`${process.env.NEXT_PUBLIC_HOME_URL}api/contentful/one-post?id=${id}`);
 
     } catch (err) {
-        console.log(err)
+        console.log(err);
     }
-    const post = await res?.json();
+    const post: Entry = await res?.json();
 
     return post
 }
@@ -45,4 +51,11 @@ export async function getPosts(limit: number, skip: number) {
     const posts: EntrySummary[] = await res.json();
 
     return posts
+}
+
+export async function getFaqs() {
+    const res = await fetch(`${process.env.NEXT_PUBLIC_HOME_URL}api/contentful/faqs`);
+    const faqs: FAQ[] = await res.json();
+
+    return faqs
 }
