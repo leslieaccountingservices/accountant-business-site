@@ -5,6 +5,7 @@ import Link from 'next/link'
 import Image from 'next/image'
 import CalendarButton from '@/components/shared-ui/CalendarButton'
 import MetaTags from '@/components/MetaTags'
+import { useRef, forwardRef } from 'react'
 import { GetStaticProps } from 'next'
 import * as fs from 'fs'
 
@@ -53,13 +54,14 @@ export const getStaticProps: GetStaticProps = async () => {
 }
 
 export default function Home(props: any) {
+  const refContainer = useRef<HTMLElement>();
 
   return (
     <>
       <MetaTags title="Leslie's Accounting Services" pageUrl={`${process.env.NEXT_PUBLIC_HOME_URL}`} imgUrl='/static/images/logo.jpg' description="Leslie's Accounting Services is an accounting firm local to Chicago, and handles accountant matters such as bookkeeping, payroll, financial planning, and personal, business, and corporate taxes." />
       <Header />
       <Banner />
-      <Main pricing={props.pricing} reviews={props.reviews} />
+      <Main pricing={props.pricing} reviews={props.reviews} aboutRef={refContainer} />
     </>
   )
 }
@@ -73,15 +75,17 @@ function Banner() {
           <div className='h-3/6 w-fit xl:w-4/6 flex flex-col-reverse md:flex-row'>
             <div className='h-full w-fit md:w-1/3 md:border-r border-black flex md:flex-col justify-center items-center'>
               <CalendarButton freeConsult={false} />
-              <button className='h-10 min-w-fit w-5/6 md:w-48 mx-1 md:mx-0 bg-myorange px-1 md:mt-2 text-bone border rounded-md shadow-md md:transition md:ease-in-out md:delay-50 md:hover:scale-110'>
-                Learn more
-              </button>
+              <Link href="/#about">
+                <button className='h-10 min-w-fit w-5/6 md:w-48 mx-1 md:mx-0 bg-myorange px-1 md:mt-2 text-bone border rounded-md shadow-md md:transition md:ease-in-out md:delay-50 md:hover:scale-110'>
+                  Learn more
+                </button>
+              </Link>
             </div>
             <div className='md:h-full w-full md:w-2/3 flex flex-col justify-center'>
               <h1 className='text-4xl font-light md:ml-4 md:my-4 text-white'>Accounting you can count on</h1>
               <p className='text-sm md:text-base md:ml-4 md:my-4'>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-              <Link className='ml-4 my-2 text-navy underline hidden md:block' href=''>
-                Get started with a free consultation!
+              <Link href="/faq" className='ml-4 my-2 text-navy underline hidden md:block'>
+                Have questions? Check out our FAQ!
               </Link>
             </div>
           </div>
@@ -91,7 +95,7 @@ function Banner() {
   )
 }
 
-function Main({ reviews = [], pricing = [] }: { reviews: IReview[], pricing: Array<Prices> }) {
+function Main({ reviews = [], pricing = [], aboutRef }: { reviews: IReview[], pricing: Array<Prices>, aboutRef: any }) {
 
   return (
     <div className='z-10 absolute w-screen h-fit inset-y-1/2 flex justify-center items-center'>
@@ -235,7 +239,7 @@ export function Pricing({ pricing }: { pricing: Array<Prices> }) {
         ))}
       </div>
       <div className='text-center my-6'>
-        <p className='text-sm font-bold'>Know what you're looking for? <Link className='text-navy font-base underline' href=''>Book your appointment now!</Link></p>
+        <p className='text-sm font-bold'>Know what you're looking for? <Link className='text-navy font-base underline' target='_blank' href={`https://cal.com/${process.env.NEXT_PUBLIC_CALCOM_USERNAME}`}>Book your appointment now!</Link></p>
         <p className='text-xs font-extralight'>You will not be charged at this time.</p>
       </div>
     </div>
