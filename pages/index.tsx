@@ -1,7 +1,6 @@
 import Header from '../components/shared-ui/Header'
 import Footer from '@/components/shared-ui/Footer'
 import Review from '@/components/Review'
-import { useState } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
 import CalendarButton from '@/components/shared-ui/CalendarButton'
@@ -54,8 +53,6 @@ export const getStaticProps: GetStaticProps = async () => {
 }
 
 export default function Home(props: any) {
-
-  const [isHome, setIsHome] = useState(true);
 
   return (
     <>
@@ -255,7 +252,7 @@ export function Reviews({ reviews }: { reviews: IReview[] }) {
         ))}
       </div>
       <div className='w-full flex flex-1 flex-col justify-center items-center mb-4 md:mb-0'>
-        <Link href={`https://www.facebook.com/lesliesaccountingchicago/reviews`}>
+        <Link className="text-sm underline text-navy mb-2" href={`https://www.facebook.com/lesliesaccountingchicago/reviews`}>
           See more reviews!
         </Link>
       </div>

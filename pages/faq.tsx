@@ -3,6 +3,9 @@ import QandA from "@/components/QandA"
 import * as fs from 'fs'
 import { GetStaticProps } from "next"
 import Footer from "@/components/shared-ui/Footer"
+import MetaTags from "@/components/MetaTags"
+import { getFaqs } from "@/lib/contentful"
+import { FAQ } from "@/lib/contentful"
 
 export type TQandA = {
     question: string;
@@ -10,26 +13,21 @@ export type TQandA = {
 }
 
 export const getStaticProps: GetStaticProps = async () => {
-    var path = require("path");
-
-    const configDirectory = path.resolve(process.cwd(), "public/static/data/");
-
-    const qas: Array<TQandA> = JSON.parse(fs.readFileSync(path.join(configDirectory, "faqs.json"), "utf8")) as Array<TQandA>;
-
-    // console.log(`${JSON.stringify(reviews[1])}\n ${typeof reviews}`);
+    const faqs: Array<FAQ> = await getFaqs();
 
     return {
         props: {
-            qas
+            qas: faqs
         }
     }
 }
 
 
-export default function FAQ({ qas }: { qas: Array<TQandA>}) {
+export default function FAQs({ qas }: { qas: Array<FAQ>}) {
 
     return (
         <>
+            <MetaTags title="Frequently Asked Questions" pageUrl={`${process.env.NEXT_PUBLIC_HOME_URL}/faq`} description="The answers to the questions we most often get asked" imgUrl="/static" />
             <Header />
             <Banner />
             <Main qas={qas} />
@@ -39,7 +37,7 @@ export default function FAQ({ qas }: { qas: Array<TQandA>}) {
 
 function Banner() {
     return (
-    <div className='w-full h-screen bg-bone'>
+    <div data-testid="faq-banner" className='w-full h-screen bg-bone'>
         <div className='w-full h-5/6 bg-gradient-to-r from-contrast to-forest flex justify-center'>
             <section className=' h-4/6 w-4/6 flex items-center'>
                 <div className='h-3/6 w-4/6 flex flex-row'>
@@ -57,10 +55,10 @@ function Banner() {
     )
 }
 
-function Main({ qas }: { qas: Array<TQandA>}) {
+function Main({ qas }: { qas: Array<FAQ>}) {
 
     return (
-        <div className='z-10 absolute w-full h-fit inset-y-1/2 flex flex-col justify-center items-center'>
+        <div data-testid="faq-main" className='z-10 absolute w-full h-fit inset-y-1/2 flex flex-col justify-center items-center'>
             <div className='w-4/6 h-fit min-h-80 transition ease-in-out duration-300 bg-bone border shadow-md rounded-md pl-8 pr-12 py-8 flex flex-col justify-between'>
                 {qas.map(qa => (
                     <QandA question={qa.question} answer={qa.answer} />
