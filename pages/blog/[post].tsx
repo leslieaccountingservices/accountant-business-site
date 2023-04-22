@@ -27,11 +27,23 @@ export async function getStaticProps({ params }: { params: any }) {
     }
 }
 
-export default function Post({ post }: { post: Entry }) {
+export default function Post({ post={
+    metadata: {tags: []},
+    id: "id",
+    createdAt: "time",
+    updatedAt: "time",
+    type: "fallback",
+    title: "title",
+    description: "description",
+    keywords: "string",
+    headerImage: "/any",
+    body: "any"
+} }: { post: Entry }) {
     const { isFallback } = useRouter()
 
     return (
         <div data-testid="post" className="h-fit">
+            
             {!isFallback ? <MetaTags title={post.title} description={post.description} imgUrl={post.headerImage} pageUrl={`${process.env.NEXT_PUBLIC_HOME_URL}/blog/${post.id}`} /> : null}
             <Header />
             {!isFallback ? <Banner img={post.headerImage} /> : <FallbackBanner /> }
