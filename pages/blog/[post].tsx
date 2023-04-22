@@ -4,7 +4,7 @@ import Image from "next/image";
 import { Entry, getPaths, getPost } from "@/lib/contentful";
 import ReactMarkdown  from "react-markdown";
 import MetaTags from "@/components/MetaTags";
-import { useEffect } from "react";
+import { useRouter } from "next/router";
 
 export async function getStaticPaths() {
     const paths = await getPaths();
@@ -27,14 +27,15 @@ export async function getStaticProps({ params }: { params: any }) {
     }
 }
 
-export default function Post({ post = null }: { post: Entry | null }) {
+export default function Post({ post }: { post: Entry }) {
+    const { isFallback } = useRouter()
 
     return (
         <div data-testid="post" className="h-fit">
-            {post ? <MetaTags title={post.title} description={post.description} imgUrl={post.headerImage} pageUrl={`${process.env.NEXT_PUBLIC_HOME_URL}/blog/${post.id}`} /> : null}
+            {!isFallback ? <MetaTags title={post.title} description={post.description} imgUrl={post.headerImage} pageUrl={`${process.env.NEXT_PUBLIC_HOME_URL}/blog/${post.id}`} /> : null}
             <Header />
-            {post ? <Banner img={post.headerImage} /> : <FallbackBanner /> }
-            {post ? <Article post={post} /> : <FallbackArticle />}
+            {!isFallback ? <Banner img={post.headerImage} /> : <FallbackBanner /> }
+            {!isFallback ? <Article post={post} /> : <FallbackArticle />}
         </div>
     )
 }
