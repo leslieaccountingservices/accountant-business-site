@@ -237,7 +237,7 @@ export function Pricing({ pricing }: { pricing: Array<Prices> }) {
         ))}
       </div>
       <div className='text-center my-6'>
-        <p className='text-sm font-bold'>Know what you're looking for? <Link className='text-navy font-base underline' target='_blank' href={`https://cal.com/${process.env.NEXT_PUBLIC_CALCOM_USERNAME}`}>Book your appointment now!</Link></p>
+        <p className='text-sm font-bold'>Know what you&apos;re looking for? <Link className='text-navy font-base underline' target='_blank' href={`https://cal.com/${process.env.NEXT_PUBLIC_CALCOM_USERNAME}`}>Book your appointment now!</Link></p>
         <p className='text-xs font-extralight'>You will not be charged at this time.</p>
       </div>
     </div>
