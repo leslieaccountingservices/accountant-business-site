@@ -46,7 +46,7 @@ export async function getPost(id: string) {
         res = await fetch(`${process.env.NEXT_PUBLIC_HOME_URL}api/contentful/one-post?id=${id}`);
 
     } catch (err) {
-        console.log(err);
+        throw new Error(`err: ${err}`)
     }
     const post: Entry = await res?.json();
 
@@ -58,7 +58,7 @@ export async function getPosts(limit: number, skip: number) {
     try {
         res = await fetch(`${process.env.NEXT_PUBLIC_HOME_URL}api/contentful/all-posts?limit=${limit}&skip=${skip}`);
     } catch(err) {
-        console.log(err);
+        throw new Error(`err: ${err}`)
     }
     const posts: EntrySummary[] = await res?.json();
 
@@ -70,7 +70,7 @@ export async function getFaqs() {
     try {
         res = await fetch(`${process.env.NEXT_PUBLIC_HOME_URL}api/contentful/faqs`);
     } catch (err) {
-        console.log(err)
+        throw new Error(`err: ${err}`)
     }
     const faqs: FAQ[] = await res?.json();
 

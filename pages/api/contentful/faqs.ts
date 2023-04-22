@@ -6,7 +6,6 @@ export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse<Array<FAQ>>
 ) {
-  const { limit, skip } = req.query;
   
   const client = await contentful.createClient({
     space: process.env.CONTENTFUL_SPACE_ID as string,
