@@ -45,32 +45,37 @@ export async function getPaths() {
 }
 
 export async function getPost(id: string) {
-    const client = await contentful.createClient({
-    space: process.env.CONTENTFUL_SPACE_ID!,
-    environment: 'master', // defaults to 'master' if not set
-    accessToken: process.env.CONTENTFUL_ACCESS_TOKEN!
-    });
-
-
-
-    const post = await client.getEntry(id);
-    console.log(`post.fields: \n${post.fields}`);
-    const formattedPost: Entry = {
-        metadata: post.metadata,
-        id: post.sys.id,
-        createdAt: post.sys.createdAt,
-        updatedAt: post.sys.updatedAt,
-        type: post.sys.contentType.sys.id,
-        title: (post.fields as any).title,
-        description: (post.fields as any).description,
-        keywords: (post.fields as any).keywords,
-        headerImage: `http:${(post.fields as any).headerImage.fields.file.url}`,
-        body: (post.fields as any).body
-    }
-    return formattedPost
+    var client
     try {
+        client = await contentful.createClient({
+        space: process.env.CONTENTFUL_SPACE_ID!,
+        environment: 'master', // defaults to 'master' if not set
+        accessToken: process.env.CONTENTFUL_ACCESS_TOKEN!
+        });
     } catch (err) {
-        throw new Error(`getPost: ${err}`)
+        throw new Error(`getPost: client: ${err}`)
+    }
+
+
+
+    try {
+        const post = await client.getEntry(id);
+        // console.log(`post.fields: \n${post.fields}`);
+        const formattedPost: Entry = {
+            metadata: post.metadata,
+            id: post.sys.id,
+            createdAt: post.sys.createdAt,
+            updatedAt: post.sys.updatedAt,
+            type: post.sys.contentType.sys.id,
+            title: (post.fields as any).title,
+            description: (post.fields as any).description,
+            keywords: (post.fields as any).keywords,
+            headerImage: `http:${(post.fields as any).headerImage.fields.file.url}`,
+            body: (post.fields as any).body
+        }
+        return formattedPost
+    } catch (err) {
+        throw new Error(`getPost: post: ${err}`)
     }
 }
 
