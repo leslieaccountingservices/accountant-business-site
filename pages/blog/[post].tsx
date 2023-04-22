@@ -27,7 +27,7 @@ export async function getStaticProps({ params }: { params: any }) {
     }
 }
 
-function Post({ post }: { post: Entry }) {
+export default function Post({ post }: { post: Entry }) {
     useEffect(() => {
         console.log(post.headerImage)
     })
@@ -79,5 +79,3 @@ function Article({ post }: { post: Entry }) {
         </article>
     )
 }
-
-export default Post;
