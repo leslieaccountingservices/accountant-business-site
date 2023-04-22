@@ -133,25 +133,25 @@ function Appeal() {
 
 function About() {
   return (
-    <section id="about" className='bg-white w-full h-fit flex flex-col justify-center items-center scroll-mt-16'>
+    <section id="about" className='bg-white w-full h-fit flex flex-col justify-center items-center scroll-mt-20 md:scroll-mt-16'>
       <h3 className='w-full h-24 flex justify-center items-center text-3xl font-light'>About Us</h3>
       <div className='w-full h-fit md:h-5/6 flex flex-col justify-center items-center'>
         <section className='w-full md:w-5/6 h-fit md:h-3/6 flex flex-col items-center md:flex-row '>
-          <div className='h-52 md:h-full w-96 md:w-3/6 flex items-center relative' >
+          <div className='h-52 md:h-80 w-full md:w-3/6 flex items-center relative' >
               <Image fill src="/static/images/accountant.jpeg" alt="accounting stock image" />
           </div>
-          <div className='h-3/6 md:h-full w-full md:w-3/6 flex flex-col justify-center items-center mb-4 md:mb-0'>
+          <div className='h-3/6 md:h-full w-full md:w-3/6 flex flex-col justify-center items-center mb-8 md:mb-0'>
             <h4 className='w-full text-center text-navy text-xl font-semibold my-2 md:my-0'>About Leslie</h4>
             <p className='text-sm px-2'> Leslie Garcia  graduated from DeVry University with a bachelors in business administration. She then received her Masters degree from Keller Graduate University in Accounting and Finance. Leslie has successfully helped businesses get started as well as conduct their accounting. She has more than eight years of experience in the industry. She has experience working with all types of businesses such as construction, retail, food service, attorneys, stores, vendors, payroll, and more.</p>
           </div>
         </section>
-        <section className='w-full md:w-5/6 h-fit md:h-3/6 flex flex-col-reverse md:flex-row items-center'>
+        <section className='w-full mb-4 md:w-5/6 h-fit md:h-3/6 flex flex-col-reverse md:flex-row items-center'>
           <div className='h-full w-full md:w-3/6 flex flex-col justify-center items-center mb-4 md:mb-0'>
             <h4 className='w-full text-center text-navy text-xl font-semibold my-2 md:my-0'>Giving Back</h4>
             <p className='text-sm px-2'>Leslie believes in giving back. She is associated board member of HOW (Housing Opportunities for Women). HOW helps find affordable housing for low income women and their children.</p>
           </div>
-          <div  className='h-52 md:h-full w-96 md:w-3/6 flex justify-center items-center'>
-            <div  className='w-full h-full md:h-5/6 bg-white relative flex'>
+          <div  className='h-52 md:h-full w-3/6 md:w-3/6 flex justify-center items-center'>
+            <div  className='h-52 md:h-80 w-full  flex items-center relative'>
               <Image fill src="/static/images/charity.jpeg" alt="charity stock image" />
             </div>
           </div>
@@ -163,7 +163,7 @@ function About() {
 
 function Services() {
   return (
-    <section id="services" className='w-full h-fit scroll-mt-16 mb-8'>
+    <section id="services" className='w-full h-fit scroll-mt-20 md:scroll-mt-16 mb-8'>
       <h3 className='w-full h-24 flex justify-center items-center text-3xl font-light'>Services</h3>
       <div className='w-full h-5/6 flex flex-col md:flex-row justify-around items-center'>
         <section className='w-5/6 md:w-80 h-5/6 border-2 border-forest bg-bone shadow-md rounded-md mb-4 md:mb-0'>
@@ -221,7 +221,7 @@ function Services() {
 export function Pricing({ pricing }: { pricing: Array<Prices> }) {
 
   return (
-    <div className="h-fit w-full flex flex-col bg-white scroll-mt-16">
+    <div className="h-fit w-full flex flex-col bg-white scroll-mt-20 md:scroll-mt-16">
       <h4 className="w-full h-24 flex justify-center items-center text-3xl font-light px-2">Pricing</h4>
       <div className='flex flex-col h-fit w-full px-2 md:px-16'>
         {pricing.map((item) => (
@@ -246,7 +246,7 @@ export function Pricing({ pricing }: { pricing: Array<Prices> }) {
 
 export function Reviews({ reviews }: { reviews: IReview[] }) {
   return (
-    <section id="reviews" className='h-fit w-full flex flex-col bg-bone scroll-mt-16'>
+    <section id="reviews" className='h-fit w-full flex flex-col bg-bone scroll-mt-20 md:scroll-mt-16'>
       <h4  className='w-full h-24 flex justify-center items-center text-3xl font-light'>Reviews</h4>
       <div className='w-full h-fit flex flex-col justify-start items-center'>
         {reviews.map((review: IReview) => (

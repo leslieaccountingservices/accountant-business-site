@@ -31,7 +31,7 @@ module.exports = {
     },
     minHeight: {
       '80': '20rem'
-    }
+    },
   },
   plugins: [
     require('@tailwindcss/typography')

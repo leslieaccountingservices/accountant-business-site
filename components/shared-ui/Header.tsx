@@ -48,7 +48,7 @@ export default function Header() {
                 </nav>
                 <CalendarButton freeConsult={true} />
             </div>
-            <div className="h-fit w-full bg-forest flex justify-around px-4 md:hidden">
+            <div className="h-6 w-full bg-forest flex justify-around px-4 md:hidden">
                 <Link
                     className="text-sm text-white mx-2 underline"
                     href={`/#about`}>
