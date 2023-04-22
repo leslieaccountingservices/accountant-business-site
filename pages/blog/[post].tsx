@@ -14,7 +14,7 @@ export async function getStaticPaths() {
         fallback: 'blocking'
     }
 }
-
+//try moving everything from contentful.ts to their respective files
 export async function getStaticProps({ params }: { params: any }) {
     const { post } = params;
 
@@ -23,21 +23,19 @@ export async function getStaticProps({ params }: { params: any }) {
     return {
         props: {
             post: blogPost
-        }
+        },
+        revalidate: 10
     }
 }
 
 export default function Post({ post }: { post: Entry }) {
-    useEffect(() => {
-        console.log(post.headerImage)
-    })
+
     return (
         <div data-testid="post" className="h-fit">
             <MetaTags title={post.title} description={post.description} imgUrl={post.headerImage} pageUrl={`${process.env.NEXT_PUBLIC_HOME_URL}/blog/${post.id}`} />
             <Header />
             <Banner img={post.headerImage} />
             <Article post={post} />
-            <Footer />
         </div>
     )
 }

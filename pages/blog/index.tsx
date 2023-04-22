@@ -4,7 +4,7 @@ import Header from "@/components/shared-ui/Header";
 import BlogLink from "@/components/BlogLink";
 import Footer from "@/components/shared-ui/Footer";
 import { GetServerSideProps } from "next";
-import { Entry, EntrySummary, getPosts } from "@/lib/contentful";
+import { EntrySummary, getPosts, morePosts } from "@/lib/contentful";
 import { useEffect, useState } from "react";
 
 export const getServerSideProps: GetServerSideProps = async () => {
@@ -77,7 +77,7 @@ function Posts({ entries = [] }: { entries: EntrySummary[] }) {
             return
         };
 
-        const newPosts = await getPosts(10, skip);
+        const newPosts = await morePosts(10, skip);
 
         if (newPosts.length === 0) {
             setEnd(true);
@@ -89,19 +89,10 @@ function Posts({ entries = [] }: { entries: EntrySummary[] }) {
         setLoading(false)
     }
 
-    useEffect(() => {
-
-        return () => {
-            setPosts(entries);
-            setSkip(10);
-            setEnd(false);
-        }
-    }, [entries])
-
     return (
         <div data-testid="blog-posts" className='w-full md:w-4/6 h-fit flex flex-col'>
             <div className="w-full h-fit flex flex-col items-center md:items-baseline  md:justify-start md:flex-row md:flex-wrap">
-                {entries.map(entry => (
+                {posts.map(entry => (
                     <BlogLink entry={entry} key={entry.id}/>
                 ))}
             </div>
