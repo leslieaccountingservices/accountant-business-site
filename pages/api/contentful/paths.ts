@@ -20,5 +20,5 @@ export default async function handler(
       }
     })
     // console.log(paths)
-  res.send(paths)
+  return res.json(paths);
 }
