@@ -8,7 +8,7 @@ export default function ServerError() {
         setTimeout(() => {
             router.push("/")
         }, 5000)
-    }, [])
+    }, [router])
 
     return (
         <div className="h-screen w-screen flex justify-center items-center">
