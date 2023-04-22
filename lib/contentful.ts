@@ -32,7 +32,7 @@ export async function getPaths() {
     try {
         res = await fetch(`${process.env.NEXT_PUBLIC_HOME_URL}api/contentful/paths`);
     } catch (err) {
-        console.log(err)
+        throw new Error(`err: ${err}`)
     }
 
     const paths = await res?.json();
