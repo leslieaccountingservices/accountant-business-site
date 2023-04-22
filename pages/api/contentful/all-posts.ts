@@ -21,19 +21,15 @@ export default async function handler(
     skip: skip,
   })
 
-    // console.log(entries)
-
-    let formatted: EntrySummary[] = entries.items.map(item => (
-      {
-        metadata: item.metadata,
-        id: item.sys.id,
-        createdAt: item.sys.createdAt,
-        title: (item.fields as any).title,
-        thumbnail: `http:${(item.fields as any).thumbnail.fields.file.url}`
-      }
-    ))
-
-  // console.log(entriesTrimmed)
+  let formatted: EntrySummary[] = entries.items.map(item => (
+    {
+      metadata: item.metadata,
+      id: item.sys.id,
+      createdAt: item.sys.createdAt,
+      title: (item.fields as any).title,
+      thumbnail: `http:${(item.fields as any).thumbnail.fields.file.url}`
+    }
+  ));
 
   return res.json(formatted)
 }
