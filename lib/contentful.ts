@@ -56,11 +56,19 @@ export async function getPost(id: string) {
         throw new Error(`getPost: client: ${err}`)
     }
 
+    var post;
+    try {
+        post = await client.getEntry(id);
+        console.log(`post: \n${post}`)
+    } catch (err) {
+        throw new Error(`getPost: post: ${err}`)
+    }
+
 
 
     try {
-        const post = await client.getEntry(id);
-        // console.log(`post.fields: \n${post.fields}`);
+        
+        console.log(`post.fields: \n${post.fields}`);
         const formattedPost: Entry = {
             metadata: post.metadata,
             id: post.sys.id,
@@ -75,7 +83,7 @@ export async function getPost(id: string) {
         }
         return formattedPost
     } catch (err) {
-        throw new Error(`getPost: post: ${err}`)
+        throw new Error(`getPost: formattedPost: ${err}`)
     }
 }
 
