@@ -69,7 +69,9 @@ function Article({ post }: { post: Entry }) {
                 <p className="ml-1 text-xs font-extralight">Written: {createdAt}</p>
                 <p className="ml-1 text-xs font-extralight mb-4">Last update: {updatedAt}</p>
                 <div className="leading-8">
-                    <ReactMarkdown className="prose max-w-none prose-img:w-1/2 prose-img:h-auto prose-img:mx-auto" children={body} />
+                    <ReactMarkdown className="prose max-w-none prose-img:w-1/2 prose-img:h-auto prose-img:mx-auto">
+                        {body}
+                    </ReactMarkdown>
                 </div>
                     
             </div>
