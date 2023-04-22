@@ -45,46 +45,28 @@ export async function getPaths() {
 }
 
 export async function getPost(id: string) {
-    var client
-    try {
-        client = await contentful.createClient({
+
+    const client = await contentful.createClient({
         space: process.env.CONTENTFUL_SPACE_ID!,
         environment: 'master', // defaults to 'master' if not set
         accessToken: process.env.CONTENTFUL_ACCESS_TOKEN!
-        });
-    } catch (err) {
-        throw new Error(`getPost: client: ${err}`)
+    });
+
+    const post = await client.getEntry(id);
+
+    const formattedPost: Entry = {
+        metadata: post.metadata,
+        id: post.sys.id,
+        createdAt: post.sys.createdAt,
+        updatedAt: post.sys.updatedAt,
+        type: post.sys.contentType.sys.id,
+        title: (post.fields as any).title,
+        description: (post.fields as any).description,
+        keywords: (post.fields as any).keywords,
+        headerImage: `http:${(post.fields as any).headerImage.fields.file.url}`,
+        body: (post.fields as any).body
     }
-
-    var post;
-    try {
-        post = await client.getEntry(id);
-        // console.log(`post: \n${JSON.stringify(post)}`)
-    } catch (err) {
-        throw new Error(`getPost: post: ${err}`)
-    }
-
-
-
-    try {
-        
-        // console.log(`post.fields: \n${JSON.stringify(post.fields)}`);
-        const formattedPost: Entry = {
-            metadata: post.metadata,
-            id: post.sys.id,
-            createdAt: post.sys.createdAt,
-            updatedAt: post.sys.updatedAt,
-            type: post.sys.contentType.sys.id,
-            title: (post.fields as any).title,
-            description: (post.fields as any).description,
-            keywords: (post.fields as any).keywords,
-            headerImage: `http:${(post.fields as any).headerImage.fields.file.url}`,
-            body: (post.fields as any).body
-        }
-        return formattedPost
-    } catch (err) {
-        throw new Error(`getPost: formattedPost: ${err}`)
-    }
+    return formattedPost
 }
 
 export async function getPosts(limit: number, skip: number) {
@@ -137,13 +119,7 @@ export async function getFaqs() {
 }
 
 export async function morePosts(limit: number, skip: number) {
-    var res;
-    try {
-        res = await fetch(`${process.env.NEXT_PUBLIC_HOME_URL}api/contentful/all-posts?limit=${limit}&skip=${skip}`);
-    } catch (err) {
-        throw new Error(`err: ${err}`);
-    }
-
+    const res = await fetch(`${process.env.NEXT_PUBLIC_HOME_URL}api/contentful/all-posts?limit=${limit}&skip=${skip}`);
     const posts: EntrySummary[] = await res.json();
     return posts
 }

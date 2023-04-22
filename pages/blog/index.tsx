@@ -5,7 +5,7 @@ import BlogLink from "@/components/BlogLink";
 import Footer from "@/components/shared-ui/Footer";
 import { GetServerSideProps } from "next";
 import { EntrySummary, getPosts, morePosts } from "@/lib/contentful";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 export const getServerSideProps: GetServerSideProps = async () => {
     const entries = await getPosts(10, 0);

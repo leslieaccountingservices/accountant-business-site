@@ -133,7 +133,7 @@ function Appeal() {
 
 function About() {
   return (
-    <section id="about" className='bg-white w-full h-screen flex flex-col justify-center items-center scroll-mt-16'>
+    <section id="about" className='bg-white w-full h-fit flex flex-col justify-center items-center scroll-mt-16'>
       <h3 className='w-full h-24 flex justify-center items-center text-3xl font-light'>About Us</h3>
       <div className='w-full h-fit md:h-5/6 flex flex-col justify-center items-center'>
         <section className='w-full md:w-5/6 h-fit md:h-3/6 flex flex-col items-center md:flex-row '>
