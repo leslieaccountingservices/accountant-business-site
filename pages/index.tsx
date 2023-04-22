@@ -112,19 +112,19 @@ function Main({ reviews = [], pricing = [] }: { reviews: IReview[], pricing: Arr
 function Appeal() {
   return (
     <section className='w-full h-fit flex flex-col px-2'>
-      <h3 className="w-full h-24 text-center md:text-left flex justify-center items-center text-3xl font-light">Why Leslie's Accounting Services</h3>
+      <h3 className="w-full h-24 text-center md:text-left flex justify-center items-center text-3xl font-light">Why Leslie&apos;s Accounting Services</h3>
       <div className='flex flex-col md:flex-row justify-center items-center md:justify-around'>
         <section className='w-full h-56  flex flex-col items-center justify-center'>
           <h4 className='text-navy text-xl font-semibold'>Experience</h4>
-          <p className='text-center text-base xl:text-lg'>With over 8 years of experience serving many different industries, Leslie's Accounting Services is the place to make your money matter.</p>
+          <p className='text-center text-base xl:text-lg'>With over 8 years of experience serving many different industries, Leslie&apos;s Accounting Services is the place to make your money matter.</p>
         </section>
         <section className='w-full h-56 flex flex-col items-center justify-center'>
           <h4 className='text-navy text-xl font-semibold'>Straightforward Pricing</h4>
-          <p className='text-center text-base xl:text-lg'>Here at Leslie's Accounting Services, we believe in tranparency. Here, you'll never run into any hidden fees. Pricing for our various services can be found <Link className='text-navy' href={''}>here</Link>.</p>
+          <p className='text-center text-base xl:text-lg'>Here at Leslie&apos;s Accounting Services, we believe in tranparency. Here, you&apos;ll never run into any hidden fees. Pricing for our various services can be found <Link className='text-navy' href={''}>here</Link>.</p>
         </section>
         <section className='w-full h-56 flex flex-col items-center justify-center'>
           <h4 className='text-navy text-xl font-semibold'>Client-first Service</h4>
-          <p className='text-center text-base xl:text-lg'>Whether it be through exceptional customer service, flexible scheduling, or our competative pricing, you will always come first at Leslie's accounting Services.</p>
+          <p className='text-center text-base xl:text-lg'>Whether it be through exceptional customer service, flexible scheduling, or our competative pricing, you will always come first at Leslie&apos;s accounting Services.</p>
         </section>
       </div>
     </section>

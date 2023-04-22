@@ -10,7 +10,7 @@ export default function Header() {
                 <nav>
                     <Link data-testid="home-link" className="" href={`/`}>
                         <h1 className="md:text-xl w-fit font-extrabold text-white md:mr-4 italic">
-                            Leslie's Accounting Services
+                            Leslie&apos;s Accounting Services
                         </h1>
                     </Link>
                 </nav>

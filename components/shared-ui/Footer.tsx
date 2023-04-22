@@ -6,7 +6,7 @@ export default function Footer({ isHome = false }: { isHome?: boolean }) {
       <nav>
         <SocialLink />
       </nav>
-      <span className="text-center">Copyright © 2023 Leslie's Accounting Services - All rights reserved.</span>
+      <span className="text-center">Copyright © 2023 Leslie&apos;s Accounting Services - All rights reserved.</span>
     </footer>
   )
 }
