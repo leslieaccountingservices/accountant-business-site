@@ -83,8 +83,6 @@ export async function getPosts(limit: number, skip: number) {
         skip: skip,
     })
 
-    // console.log(entries)
-
     let formatted: EntrySummary[] = entries.items.map(item => (
         {
             metadata: item.metadata,

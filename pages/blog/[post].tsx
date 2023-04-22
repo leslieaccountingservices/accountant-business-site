@@ -11,7 +11,7 @@ export async function getStaticPaths() {
 
     return {
         paths,
-        fallback: 'blocking'
+        fallback: true
     }
 }
 //try moving everything from contentful.ts to their respective files
@@ -23,19 +23,27 @@ export async function getStaticProps({ params }: { params: any }) {
     return {
         props: {
             post: blogPost
-        },
-        revalidate: 10
+        }
     }
 }
 
-export default function Post({ post }: { post: Entry }) {
+export default function Post({ post = null }: { post: Entry | null }) {
 
     return (
         <div data-testid="post" className="h-fit">
-            <MetaTags title={post.title} description={post.description} imgUrl={post.headerImage} pageUrl={`${process.env.NEXT_PUBLIC_HOME_URL}/blog/${post.id}`} />
+            {post ? <MetaTags title={post.title} description={post.description} imgUrl={post.headerImage} pageUrl={`${process.env.NEXT_PUBLIC_HOME_URL}/blog/${post.id}`} /> : null}
             <Header />
-            <Banner img={post.headerImage} />
-            <Article post={post} />
+            {post ? <Banner img={post.headerImage} /> : <FallbackBanner /> }
+            {post ? <Article post={post} /> : <FallbackArticle />}
+        </div>
+    )
+}
+
+function FallbackBanner() {
+    return (
+        <div data-testid="post-banner" className='w-full h-screen'>
+            <div className='w-full h-5/6 bg-gradient-to-r from-contrast to-forest flex justify-center relative'>
+            </div>
         </div>
     )
 }
@@ -44,15 +52,32 @@ function Banner({ img }: { img: any }) {
 
     return (
         <div data-testid="post-banner" className='w-full h-screen'>
-        <div className='w-full h-5/6 bg-gradient-to-r from-contrast to-forest flex justify-center relative'>
-            <Image priority src={img} alt="header image"
-            fill
-            sizes="(max-width: 768px) 100vw,
-                (max-width: 1200px) 50vw,
-                33vw"
-            />
+            <div className='w-full h-5/6 bg-gradient-to-r from-contrast to-forest flex justify-center relative'>
+                <Image priority src={img} alt="header image"
+                fill
+                sizes="(max-width: 768px) 100vw,
+                    (max-width: 1200px) 50vw,
+                    33vw"
+                />
+            </div>
         </div>
-    </div>
+    )
+}
+
+function FallbackArticle() {
+    return (
+        <article data-testid="post-article" className='z-10 flex flex-col absolute w-full h-fit inset-y-1/2 md:inset-y-1/4 justify-center items-center'>
+            <div className='w-full md:w-4/6 h-fit bg-bone border shadow-md rounded-md py-6 px-10'>
+                <h4 className="font-bold text-4xl h-24 w-4/6 animate-pulse"></h4>
+                <h5 className="ml-1 w-16 h-8 animate-pulse">By Leslie Garcia</h5>
+                <p className="ml-1 text-xs w-24 h-8 font-extralight animate-pulse"></p>
+                <p className="ml-1 text-xs w-24 h-8 font-extralight mb-4 animate-pulse"></p>
+                <div className="w-5/6 h-96 animate-pulse">
+                </div>
+                    
+            </div>
+                <Footer />
+        </article>
     )
 }
 
