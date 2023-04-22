@@ -27,8 +27,15 @@ export interface FAQ {
 }
 
 export async function getPaths() {
-    const res = await fetch(`${process.env.NEXT_PUBLIC_HOME_URL}api/contentful/paths`);
-    const paths = await res.json();
+    var res;
+
+    try {
+        res = await fetch(`${process.env.NEXT_PUBLIC_HOME_URL}api/contentful/paths`);
+    } catch (err) {
+        console.log(err)
+    }
+
+    const paths = await res?.json();
 
     return paths
 }
@@ -47,15 +54,25 @@ export async function getPost(id: string) {
 }
 
 export async function getPosts(limit: number, skip: number) {
-    const res = await fetch(`${process.env.NEXT_PUBLIC_HOME_URL}api/contentful/all-posts?limit=${limit}&skip=${skip}`);
-    const posts: EntrySummary[] = await res.json();
+    var res;
+    try {
+        res = await fetch(`${process.env.NEXT_PUBLIC_HOME_URL}api/contentful/all-posts?limit=${limit}&skip=${skip}`);
+    } catch(err) {
+        console.log(err);
+    }
+    const posts: EntrySummary[] = await res?.json();
 
     return posts
 }
 
 export async function getFaqs() {
-    const res = await fetch(`${process.env.NEXT_PUBLIC_HOME_URL}api/contentful/faqs`);
-    const faqs: FAQ[] = await res.json();
+    var res;
+    try {
+        res = await fetch(`${process.env.NEXT_PUBLIC_HOME_URL}api/contentful/faqs`);
+    } catch (err) {
+        console.log(err)
+    }
+    const faqs: FAQ[] = await res?.json();
 
     return faqs
 }
