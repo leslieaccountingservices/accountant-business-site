@@ -1,7 +1,6 @@
 import Header from "@/components/shared-ui/Header"
 import QandA from "@/components/QandA"
-import * as fs from 'fs'
-import { GetStaticProps } from "next"
+import { GetServerSideProps } from "next"
 import Footer from "@/components/shared-ui/Footer"
 import MetaTags from "@/components/MetaTags"
 import { getFaqs } from "@/lib/contentful"
@@ -12,7 +11,7 @@ export type TQandA = {
     answer: string;
 }
 
-export const getStaticProps: GetStaticProps = async () => {
+export const getServerSideProps: GetServerSideProps = async () => {
     const faqs: Array<FAQ> = await getFaqs();
 
     return {
