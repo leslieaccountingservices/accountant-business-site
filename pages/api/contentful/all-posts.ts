@@ -31,5 +31,5 @@ export default async function handler(
     }
   ));
 
-  return res.json(formatted)
+  res.status(200).json(formatted)
 }
