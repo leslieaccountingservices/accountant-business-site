@@ -33,7 +33,7 @@ export async function getPaths() {
         accessToken: process.env.CONTENTFUL_ACCESS_TOKEN as string
     });
 
-    const entries = await client.getEntries()
+    const entries = await client.getEntries({ content_type: 'main' })
 
     let paths = entries.items.map(item => {
         return {
@@ -59,7 +59,7 @@ export async function getPost(id: string) {
     var post;
     try {
         post = await client.getEntry(id);
-        console.log(`post: \n${JSON.stringify(post)}`)
+        // console.log(`post: \n${JSON.stringify(post)}`)
     } catch (err) {
         throw new Error(`getPost: post: ${err}`)
     }
@@ -68,7 +68,7 @@ export async function getPost(id: string) {
 
     try {
         
-        console.log(`post.fields: \n${JSON.stringify(post.fields)}`);
+        // console.log(`post.fields: \n${JSON.stringify(post.fields)}`);
         const formattedPost: Entry = {
             metadata: post.metadata,
             id: post.sys.id,
