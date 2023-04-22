@@ -96,7 +96,7 @@ function Posts({ entries = [] }: { entries: EntrySummary[] }) {
             setSkip(10);
             setEnd(false);
         }
-    }, [])
+    }, [entries])
 
     return (
         <div data-testid="blog-posts" className='w-full md:w-4/6 h-fit flex flex-col'>

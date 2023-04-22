@@ -4,10 +4,6 @@ import { useEffect } from "react"
 import { EntrySummary } from "@/lib/contentful"
 
 export default function BlogLink({ entry }: { entry: EntrySummary}) {
-  useEffect(() => {
-    console.log(entry.thumbnail)
-  }, [])
-
   const localizeDate = (date: string) => {
     let localDate: Date = new Date(date);
     let localstring: string = localDate.toString()

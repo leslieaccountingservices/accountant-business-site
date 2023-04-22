@@ -9,6 +9,7 @@ export default function MetaTags({ title, description, pageUrl, imgUrl="/static/
         <meta name="description" content={description} />
         <meta name="viewport" content="width=device-width, initial-scale=1.0"></meta>
         <meta name="keywords" content={keywords}></meta>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 
         {/* <!-- Open Graph / Facebook --> */}
         <meta property="og:type" content="website"/>

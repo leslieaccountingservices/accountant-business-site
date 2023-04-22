@@ -5,7 +5,6 @@ import Link from 'next/link'
 import Image from 'next/image'
 import CalendarButton from '@/components/shared-ui/CalendarButton'
 import MetaTags from '@/components/MetaTags'
-import { useRef, forwardRef } from 'react'
 import { GetStaticProps } from 'next'
 import * as fs from 'fs'
 
@@ -54,14 +53,13 @@ export const getStaticProps: GetStaticProps = async () => {
 }
 
 export default function Home(props: any) {
-  const refContainer = useRef<HTMLElement>();
 
   return (
     <>
       <MetaTags title="Leslie's Accounting Services" pageUrl={`${process.env.NEXT_PUBLIC_HOME_URL}`} imgUrl='/static/images/logo.jpg' description="Leslie's Accounting Services is an accounting firm local to Chicago, and handles accountant matters such as bookkeeping, payroll, financial planning, and personal, business, and corporate taxes." />
       <Header />
       <Banner />
-      <Main pricing={props.pricing} reviews={props.reviews} aboutRef={refContainer} />
+      <Main pricing={props.pricing} reviews={props.reviews} />
     </>
   )
 }
@@ -95,7 +93,7 @@ function Banner() {
   )
 }
 
-function Main({ reviews = [], pricing = [], aboutRef }: { reviews: IReview[], pricing: Array<Prices>, aboutRef: any }) {
+function Main({ reviews = [], pricing = [] }: { reviews: IReview[], pricing: Array<Prices> }) {
 
   return (
     <div className='z-10 absolute w-screen h-fit inset-y-1/2 flex justify-center items-center'>
@@ -114,7 +112,7 @@ function Main({ reviews = [], pricing = [], aboutRef }: { reviews: IReview[], pr
 function Appeal() {
   return (
     <section className='w-full h-fit flex flex-col px-2'>
-      <h3 className='w-full h-24 text-center md:text-left flex justify-center items-center text-3xl font-light'>Why Leslie's Accounting Services</h3>
+      <h3 className="w-full h-24 text-center md:text-left flex justify-center items-center text-3xl font-light">Why Leslie's Accounting Services</h3>
       <div className='flex flex-col md:flex-row justify-center items-center md:justify-around'>
         <section className='w-full h-56  flex flex-col items-center justify-center'>
           <h4 className='text-navy text-xl font-semibold'>Experience</h4>
