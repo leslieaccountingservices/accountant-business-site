@@ -59,7 +59,7 @@ export async function getPost(id: string) {
     var post;
     try {
         post = await client.getEntry(id);
-        console.log(`post: \n${post}`)
+        console.log(`post: \n${JSON.stringify(post)}`)
     } catch (err) {
         throw new Error(`getPost: post: ${err}`)
     }
@@ -68,7 +68,7 @@ export async function getPost(id: string) {
 
     try {
         
-        console.log(`post.fields: \n${post.fields}`);
+        console.log(`post.fields: \n${JSON.stringify(post.fields)}`);
         const formattedPost: Entry = {
             metadata: post.metadata,
             id: post.sys.id,
