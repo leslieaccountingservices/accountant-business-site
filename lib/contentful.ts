@@ -46,28 +46,31 @@ export async function getPaths() {
 
 export async function getPost(id: string) {
     const client = await contentful.createClient({
-    space: process.env.CONTENTFUL_SPACE_ID as string,
+    space: process.env.CONTENTFUL_SPACE_ID!,
     environment: 'master', // defaults to 'master' if not set
-    accessToken: process.env.CONTENTFUL_ACCESS_TOKEN as string
+    accessToken: process.env.CONTENTFUL_ACCESS_TOKEN!
     });
 
+
+
+    const post = await client.getEntry(id);
+    console.log(`post.fields: \n${post.fields}`);
+    const formattedPost: Entry = {
+        metadata: post.metadata,
+        id: post.sys.id,
+        createdAt: post.sys.createdAt,
+        updatedAt: post.sys.updatedAt,
+        type: post.sys.contentType.sys.id,
+        title: (post.fields as any).title,
+        description: (post.fields as any).description,
+        keywords: (post.fields as any).keywords,
+        headerImage: `http:${(post.fields as any).headerImage.fields.file.url}`,
+        body: (post.fields as any).body
+    }
+    return formattedPost
     try {
-        const post = await client.getEntry(id as string);
-        const formatted: Entry = {
-            metadata: post.metadata,
-            id: post.sys.id,
-            createdAt: post.sys.createdAt,
-            updatedAt: post.sys.updatedAt,
-            type: post.sys.contentType.sys.id,
-            title: (post.fields as any).title,
-            description: (post.fields as any).description,
-            keywords: (post.fields as any).keywords,
-            headerImage: `http:${(post.fields as any).headerImage.fields.file.url}`,
-            body: (post.fields as any).body
-        }
-        return formatted
     } catch (err) {
-        throw new Error(`Error in getPost: ${err}`)
+        throw new Error(`getPost: ${err}`)
     }
 }
 
@@ -85,7 +88,7 @@ export async function getPosts(limit: number, skip: number) {
         skip: skip,
     })
 
-    let formatted: EntrySummary[] = entries.items.map(item => (
+    let formattedEntries: EntrySummary[] = entries.items.map(item => (
         {
             metadata: item.metadata,
             id: item.sys.id,
@@ -95,7 +98,7 @@ export async function getPosts(limit: number, skip: number) {
         }
     ))
 
-    return formatted
+    return formattedEntries
 }
 
 export async function getFaqs() {
