@@ -70,7 +70,7 @@ function Banner() {
     <div className='w-screen h-screen bg-bone'>
       <div className='w-full h-5/6 bg-gradient-to-r from-contrast to-forest flex justify-center'>
         <section className=' h-4/6 w-full md:w-4/6 flex items-center justify-center md:justify-start'>
-          <div className='h-3/6 w-fit xl:w-4/6 flex flex-col-reverse md:flex-row'>
+          <div className='h-3/6 w-fit xl:w-4/6 px-4 md:px-0 flex flex-col-reverse md:flex-row'>
             <div className='h-full w-fit md:w-1/3 md:border-r border-black flex md:flex-col justify-center items-center'>
               <CalendarButton freeConsult={false} />
               <Link href="/#about">
@@ -81,7 +81,7 @@ function Banner() {
             </div>
             <div className='md:h-full w-full md:w-2/3 flex flex-col justify-center'>
               <h1 className='text-4xl font-light md:ml-4 md:my-4 text-white'>Accounting you can count on</h1>
-              <p className='text-sm md:text-base md:ml-4 md:my-4'>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+              <p className='text-sm md:text-base md:ml-4 md:my-4'>Whether it&apos;s corporate taxes, small business taxes, or just dealing with your personal taxes, you can count on Leslie&apos;s Accounting Services to keep your money in your wallet.</p>
               <Link href="/faq" className='ml-4 my-2 text-navy underline hidden md:block'>
                 Have questions? Check out our FAQ!
               </Link>
@@ -147,8 +147,8 @@ function About() {
         </section>
         <section className='w-full mb-4 md:w-5/6 h-fit md:h-3/6 flex flex-col-reverse md:flex-row items-center'>
           <div className='h-full w-full md:w-3/6 flex flex-col justify-center items-center mb-4 md:mb-0'>
-            <h4 className='w-full text-center text-navy text-xl font-semibold my-2 md:my-0'>Giving Back</h4>
-            <p className='text-sm px-2'>Leslie believes in giving back. She is associated board member of HOW (Housing Opportunities for Women). HOW helps find affordable housing for low income women and their children.</p>
+            <h4 className='w-full text-center text-navy text-xl font-semibold my-2 md:my-0'>Entrepreneurship</h4>
+            <p className='text-sm px-2'>Leslie believes in entrepreneurship. Not only has she helped many start their own businesses, but she also owns her own business as well, called <Link className={`text-navy font-base underline`} href={`http://gemzandboardz.com/`} target="_blank">GemzandBoardz</Link>. With her experience, she is more than prepared to meet your business needs. Book your appointment today!</p>
           </div>
           <div  className='h-52 md:h-full w-3/6 md:w-3/6 flex justify-center items-center'>
             <div  className='h-52 md:h-80 w-full  flex items-center relative'>
