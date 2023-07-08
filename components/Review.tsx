@@ -4,8 +4,8 @@ import Image from "next/image"
 export default function Review({ review }: { review: IReview }) {
     return (
         <div className="h-fit w-full md:w-4/6 flex flex-col justify-center items-center my-4">
-            <div className="h-20 w-20 rounded-full border border-navy bg-cyan-400 relative overflow-hidden">
-                <Image fill src={`/static/images/${review.imageUrl}`} alt={`${review.fName}`} />
+            <div className="h-20 w-20 rounded-full border border-navy relative overflow-hidden">
+                <Image fill src={`/static/images/profile.svg`} alt={`${review.fName}`} />
             </div>
             <div className="h-fit w-fit my-1">
                 <p className="font-semibold text-sm">

@@ -90,8 +90,8 @@ function Posts({ entries = [] }: { entries: EntrySummary[] }) {
     }
 
     return (
-        <div data-testid="blog-posts" className='w-full md:w-4/6 h-fit flex flex-col'>
-            <div className="w-full h-fit flex flex-col items-center md:items-baseline  md:justify-start md:flex-row md:flex-wrap">
+        <div data-testid="blog-posts" className='w-full md:w-5/6 h-fit flex flex-col justify-center'>
+            <div className="w-full py-12 gap-2 h-fit flex flex-col justify-center items-center md:items-baseline md:flex-row md:flex-wrap">
                 {posts.map(entry => (
                     <BlogLink entry={entry} key={entry.id}/>
                 ))}

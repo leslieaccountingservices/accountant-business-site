@@ -2,25 +2,25 @@
     {
         "id": 1,
         "imageUrl": "bobthomas.jpeg",
-        "fName": "Bob",
-        "lName": "Thomas",
-        "rating": 4.5,
-        "review": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Netus et malesuada fames ac turpis."
+        "fName": "Yasmin",
+        "lName": "Noriega",
+        "rating": 5,
+        "review": "Had a consultation with Leslie and she was beyond helpful and super nice! She answered all the questions I had and made it super easy to understand. Definitely recommend her services!"
     },
     {
         "id": 2,
         "imageUrl": "actresses-kirsten-dunst-wallpaper-preview.jpeg",
-        "fName": "Jane",
-        "lName": "Watson",
+        "fName": "Naperville Volts & Watts",
+        "lName": "",
         "rating": 5,
-        "review": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
+        "review": "Was looking for small business Quickbooks help and came across Leslie online. I had some sessions with her where she showed me the basics and answered any questions that I had. She is professional, responsive, knowledgeable and very helpful. Not only do I feel more confident with my Quickbooks skill set moving forward, I'm glad to have found someone who I feel truly cares about her clients. Her services are highly recommended!"
     },
     {
         "id": 3,
         "imageUrl": "Tobey-Maguire.webp",
-        "fName": "Peter",
-        "lName": "Parker",
+        "fName": "Rie",
+        "lName": "Venge",
         "rating": 5,
-        "review": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Eget arcu dictum varius duis at consectetur lorem donec."
+        "review": "Came in for a consultation and Leslie helped me with all the questions I had. She explained all the convenient tools that Quickbooks has for small businesses. She’s very informative and insightful!"
     }
 ]
