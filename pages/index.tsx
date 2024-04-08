@@ -7,6 +7,9 @@ import CalendarButton from '@/components/shared-ui/CalendarButton'
 import MetaTags from '@/components/MetaTags'
 import { GetStaticProps } from 'next'
 import * as fs from 'fs'
+import { getServicesPrices, ServicePricing } from '@/lib/contentful'
+import { useCallback, useEffect } from 'react'
+import ReactMarkdown  from "react-markdown";
 
 export interface IReview {
   id: string;
@@ -42,12 +45,15 @@ export const getStaticProps: GetStaticProps = async () => {
 
   const pricing: Array<Prices> = JSON.parse(fs.readFileSync(path.join(dataDirectory, "pricing.json"), "utf-8")) as Array<Prices>;
 
+  const servicePrices = await getServicesPrices();
+
   // console.log(pricing)
 
   return {
     props: {
       reviews,
-      pricing
+      pricing,
+      servicePrices
     }
   }
 }
@@ -59,7 +65,7 @@ export default function Home(props: any) {
       <MetaTags title="Leslie's Accounting Services" pageUrl={`${process.env.NEXT_PUBLIC_HOME_URL}`} imgUrl='/static/images/logo.jpg' description="Leslie's Accounting Services is an accounting firm local to Chicago, and handles accountant matters such as bookkeeping, payroll, financial planning, and personal, business, and corporate taxes." />
       <Header />
       <Banner />
-      <Main pricing={props.pricing} reviews={props.reviews} />
+      <Main servicePrices={props.servicePrices} pricing={props.pricing} reviews={props.reviews} />
     </>
   )
 }
@@ -67,7 +73,7 @@ export default function Home(props: any) {
 function Banner() {
 
   return (
-    <div className='w-screen h-screen bg-bone'>
+    <div className='w-full h-screen bg-bone'>
       <div className='w-full h-5/6 bg-gradient-to-r from-contrast to-forest flex justify-center'>
         <section className=' h-4/6 w-full md:w-4/6 flex items-center justify-center md:justify-start'>
           <div className='h-3/6 w-fit xl:w-4/6 px-4 md:px-0 flex flex-col-reverse md:flex-row'>
@@ -93,15 +99,15 @@ function Banner() {
   )
 }
 
-function Main({ reviews = [], pricing = [] }: { reviews: IReview[], pricing: Array<Prices> }) {
+function Main({ servicePrices = [], reviews = [], pricing = [] }: { servicePrices: any, reviews: IReview[], pricing: Array<Prices> }) {
 
   return (
-    <div className='z-10 absolute w-screen h-fit inset-y-1/2 flex justify-center items-center'>
-      <div className='w-screen md:w-4/6 h-fit bg-bone border shadow-md rounded-md'>
+    <div className='z-10 absolute w-full h-fit inset-y-1/2 flex justify-center items-center'>
+      <div className='w-screen lg:w-4/6 h-fit bg-bone border shadow-md rounded-md'>
         <Appeal />
         <About />
-        <Services />
-        <Pricing pricing={pricing} />
+        <Services servicePrices={servicePrices} />
+        <Pricing  pricing={pricing} />
         <Reviews reviews={reviews} />
         <Footer isHome />
       </div>
@@ -161,62 +167,92 @@ function About() {
   )
 }
 
-function Services() {
-  return (
-    <section id="services" className='w-full h-fit scroll-mt-20 md:scroll-mt-16 mb-8'>
-      <h3 className='w-full h-24 flex justify-center items-center text-3xl font-light'>Services</h3>
-      <div className='w-full h-5/6 flex flex-col md:flex-row justify-around items-center'>
-        <section className='w-5/6 md:w-80 h-5/6 border-2 border-forest bg-bone shadow-md rounded-md mb-4 md:mb-0'>
-          <h4 className='w-full text-center text-navy text-xl font-semibold'>Compliance</h4>
-          <ul className='mt-10 ml-8 text-black list-disc flex flex-col justify-between'>
-            <li className='my-2'>Corporate Taxes</li>
-            <li className='my-2'>Business Taxes</li>
-            <li className='my-2'>Personal Taxes</li>
-            <li className='my-2'>Local Sales Tax</li>
-            <li className='my-2'>Legally Required Corporate Documentation</li>
-          </ul>
-        </section>
+function Services ({ servicePrices }: { servicePrices: Array<ServicePricing> }) {
 
-        <section className='w-5/6 md:w-80 h-5/6 border-2 border-forest bg-bone shadow-md rounded-md mb-4 md:mb-0'>
-          <h4 className='w-full text-center text-navy text-xl font-semibold'>Management</h4>
-          <ul className='mt-10 ml-8 text-black list-disc flex flex-col justify-between'>
-            <li className='my-2'>Bookkeeping
-              <ul className='list-square ml-8 mr-4 my-1'>
-                <li>Manage daily transactions</li>
-              </ul>
-            </li>
-            <li className='my-2'>Payroll
-              <ul className='list-square ml-8 mr-4 my-1'>
-                <li>Management of payroll and taxes</li>
-              </ul>
-            </li>
-            <li className='my-2'>Planning
-              <ul className='list-square ml-8 mr-4 my-1'>
-                <li>Reporting and advice to <span className='text-forest font-bold'>support growth</span></li>
-              </ul>
-            </li>
-          </ul>
-        </section>
+  useEffect(() => {
+    console.log(servicePrices);
+  }, []);
 
-        <section className='w-5/6 md:w-80 h-5/6 border-2 border-forest bg-bone shadow-md rounded-md mb-4 md:mb-0'>
-          <h4 className='w-full text-center text-navy text-xl font-semibold'>Advisory</h4>
-          <ul className='mt-10 ml-8 text-black list-disc flex flex-col justify-between'>
-            <li className='my-2'>Reporting
-              <ul className='list-square ml-8 mr-4 my-1'>
-                <li>Help directors make informed finance and <span className='text-forest font-bold'>accounting decisions</span></li>
-              </ul>
-            </li>
-            <li className='my-2'>Quick Books Training
-              <ul className='list-square ml-8 mr-4 my-1'>
-                <li><span className='text-forest font-bold'>Training</span> in a one-on-one setting or group setting</li>
-              </ul>
-            </li>
-          </ul>
-        </section>
-      </div>
+  return servicePrices.length > 0 ? 
+   (
+    <section>
+      {servicePrices.map(service => (
+        <article>
+          <h4>{service.serviceName}</h4>
+
+          {service.price > 0 ?
+          <p>{service.price}</p>
+          : null}
+
+          {/* {service.subPricing ?
+          <ReactMarkdown className="prose prose-img:w-1/2 prose-img:h-auto prose-img:mx-auto">
+              {service.subPricing}
+          </ReactMarkdown>
+          : null} */}
+
+          {JSON.stringify(service.subPricing)}
+        </article>
+      ))}
     </section>
-  )
+   ) : null
 }
+
+// function Services() {
+//   return (
+//     <section id="services" className='w-full h-fit scroll-mt-20 md:scroll-mt-16 mb-8'>
+//       <h3 className='w-full h-24 flex justify-center items-center text-3xl font-light'>Services</h3>
+//       <div className='w-full h-5/6 flex flex-col md:flex-row justify-around items-center'>
+//         <section className='w-5/6 md:w-80 h-5/6 border-2 border-forest bg-bone shadow-md rounded-md mb-4 md:mb-0'>
+//           <h4 className='w-full text-center text-navy text-xl font-semibold'>Compliance</h4>
+//           <ul className='mt-10 ml-8 text-black list-disc flex flex-col justify-between'>
+//             <li className='my-2'>Corporate Taxes</li>
+//             <li className='my-2'>Business Taxes</li>
+//             <li className='my-2'>Personal Taxes</li>
+//             <li className='my-2'>Local Sales Tax</li>
+//             <li className='my-2'>Legally Required Corporate Documentation</li>
+//           </ul>
+//         </section>
+
+//         <section className='w-5/6 md:w-80 h-5/6 border-2 border-forest bg-bone shadow-md rounded-md mb-4 md:mb-0'>
+//           <h4 className='w-full text-center text-navy text-xl font-semibold'>Management</h4>
+//           <ul className='mt-10 ml-8 text-black list-disc flex flex-col justify-between'>
+//             <li className='my-2'>Bookkeeping
+//               <ul className='list-square ml-8 mr-4 my-1'>
+//                 <li>Manage daily transactions</li>
+//               </ul>
+//             </li>
+//             <li className='my-2'>Payroll
+//               <ul className='list-square ml-8 mr-4 my-1'>
+//                 <li>Management of payroll and taxes</li>
+//               </ul>
+//             </li>
+//             <li className='my-2'>Planning
+//               <ul className='list-square ml-8 mr-4 my-1'>
+//                 <li>Reporting and advice to <span className='text-forest font-bold'>support growth</span></li>
+//               </ul>
+//             </li>
+//           </ul>
+//         </section>
+
+//         <section className='w-5/6 md:w-80 h-5/6 border-2 border-forest bg-bone shadow-md rounded-md mb-4 md:mb-0'>
+//           <h4 className='w-full text-center text-navy text-xl font-semibold'>Advisory</h4>
+//           <ul className='mt-10 ml-8 text-black list-disc flex flex-col justify-between'>
+//             <li className='my-2'>Reporting
+//               <ul className='list-square ml-8 mr-4 my-1'>
+//                 <li>Help directors make informed finance and <span className='text-forest font-bold'>accounting decisions</span></li>
+//               </ul>
+//             </li>
+//             <li className='my-2'>Quick Books Training
+//               <ul className='list-square ml-8 mr-4 my-1'>
+//                 <li><span className='text-forest font-bold'>Training</span> in a one-on-one setting or group setting</li>
+//               </ul>
+//             </li>
+//           </ul>
+//         </section>
+//       </div>
+//     </section>
+//   )
+// }
 
 export function Pricing({ pricing }: { pricing: Array<Prices> }) {
 

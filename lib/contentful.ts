@@ -26,6 +26,12 @@ export interface FAQ {
     answer: string;
 }
 
+export interface ServicePricing {
+    price: number;
+    serviceName: string;
+    subPricing:  any | null
+}
+
 export async function getPaths() {
     const client = await contentful.createClient({
         space: process.env.CONTENTFUL_SPACE_ID as string,
@@ -116,6 +122,28 @@ export async function getFaqs() {
   ))
 
     return formatted
+}
+
+export async function getServicesPrices() {
+    const client = await contentful.createClient({
+        space: process.env.CONTENTFUL_SPACE_ID as string,
+        environment: 'master', // defaults to 'master' if not set
+        accessToken: process.env.CONTENTFUL_ACCESS_TOKEN as string
+    })
+
+    const servicePrices = await client.getEntries({
+        content_type: 'servicePricing'
+    })
+    
+    const formatted = servicePrices.items.map(item => (
+        {
+            price: (item.fields as any).price as number,
+            serviceName: (item.fields as any).serviceName as string,
+            subPricing: (item.fields as any).subPricing as any || null
+        }
+    ))
+
+    return formatted;
 }
 
 export async function morePosts(limit: number, skip: number) {

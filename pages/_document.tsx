@@ -4,7 +4,7 @@ export default function Document() {
   return (
     <Html lang="en">
       <Head />
-      <body className='bg-bone w-full relative'>
+      <body className='bg-bone max-w-screen relative'>
         <Main />
         <NextScript />
       </body>
