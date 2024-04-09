@@ -27,9 +27,19 @@ export interface FAQ {
 }
 
 export interface ServicePricing {
-    price: number;
     serviceName: string;
+    serviceDesc: string | null;
+    price: number;
+    priceDetails: string | null;
     subPricing:  any | null
+}
+
+export interface IPackages {
+    title: string;
+    cost: number;
+    period: string,
+    desc: string | null,
+    includes: Array<string | null>
 }
 
 export async function getPaths() {
@@ -134,12 +144,41 @@ export async function getServicesPrices() {
     const servicePrices = await client.getEntries({
         content_type: 'servicePricing'
     })
-    
+
     const formatted = servicePrices.items.map(item => (
         {
-            price: (item.fields as any).price as number,
             serviceName: (item.fields as any).serviceName as string,
+            serviceDesc: (item.fields as any).serviceDescription as string || null,
+            price: (item.fields as any).price as number,
+            priceDetails: (item.fields as any).pricingDetails as string || null,
             subPricing: (item.fields as any).subPricing as any || null
+        }
+    ))
+
+    return formatted;
+}
+
+export async function getPackages() {
+    const client = await contentful.createClient({
+        space: process.env.CONTENTFUL_SPACE_ID as string,
+        environment: 'master', // defaults to 'master' if not set
+        accessToken: process.env.CONTENTFUL_ACCESS_TOKEN as string
+    });
+
+    const packages = await client.getEntries({
+        content_type: 'packages'
+    })
+
+    console.log(JSON.stringify(packages, null, 2));
+
+
+    const formatted: Array<IPackages> = packages.items.map(item => (
+        {
+            title: (item.fields as any).packageTitle as string,
+            cost: (item.fields as any).cost as number,
+            period: (item.fields as any).payPeriod as string,
+            desc: (item.fields as any).description as string,
+            includes: (item.fields as any).includes as Array<string | null>
         }
     ))
 

@@ -7,8 +7,8 @@ import CalendarButton from '@/components/shared-ui/CalendarButton'
 import MetaTags from '@/components/MetaTags'
 import { GetStaticProps } from 'next'
 import * as fs from 'fs'
-import { getServicesPrices, ServicePricing } from '@/lib/contentful'
-import { useCallback, useEffect } from 'react'
+import { getServicesPrices, IPackages, ServicePricing, getPackages } from '@/lib/contentful'
+import { useEffect } from 'react'
 import ReactMarkdown  from "react-markdown";
 
 export interface IReview {
@@ -47,13 +47,16 @@ export const getStaticProps: GetStaticProps = async () => {
 
   const servicePrices = await getServicesPrices();
 
+  const packages: Array<IPackages> = await getPackages();
+
   // console.log(pricing)
 
   return {
     props: {
       reviews,
       pricing,
-      servicePrices
+      servicePrices,
+      packages
     }
   }
 }
@@ -65,7 +68,7 @@ export default function Home(props: any) {
       <MetaTags title="Leslie's Accounting Services" pageUrl={`${process.env.NEXT_PUBLIC_HOME_URL}`} imgUrl='/static/images/logo.jpg' description="Leslie's Accounting Services is an accounting firm local to Chicago, and handles accountant matters such as bookkeeping, payroll, financial planning, and personal, business, and corporate taxes." />
       <Header />
       <Banner />
-      <Main servicePrices={props.servicePrices} pricing={props.pricing} reviews={props.reviews} />
+      <Main packages={props.packages} servicePrices={props.servicePrices} pricing={props.pricing} reviews={props.reviews} />
     </>
   )
 }
@@ -99,18 +102,19 @@ function Banner() {
   )
 }
 
-function Main({ servicePrices = [], reviews = [], pricing = [] }: { servicePrices: any, reviews: IReview[], pricing: Array<Prices> }) {
+function Main({ packages, servicePrices = [], reviews = [], pricing = [] }: { packages: Array<IPackages>, servicePrices: any, reviews: IReview[], pricing: Array<Prices> }) {
 
   return (
     <div className='z-10 absolute w-full h-fit inset-y-1/2 flex justify-center items-center'>
-      <div className='w-screen lg:w-4/6 h-fit bg-bone border shadow-md rounded-md'>
+      <main className='w-screen lg:w-4/6 h-fit bg-bone border shadow-md rounded-md'>
         <Appeal />
         <About />
         <Services servicePrices={servicePrices} />
+        <Packages packages={packages} />
         <Pricing  pricing={pricing} />
         <Reviews reviews={reviews} />
         <Footer isHome />
-      </div>
+      </main>
     </div>
   )
 }
@@ -120,18 +124,18 @@ function Appeal() {
     <section className='w-full h-fit flex flex-col px-2'>
       <h3 className="w-full h-24 text-center md:text-left flex justify-center items-center text-3xl font-light">Why Leslie&apos;s Accounting Services</h3>
       <div className='flex flex-col md:flex-row justify-center items-center md:justify-around'>
-        <section className='w-full h-56  flex flex-col items-center justify-center'>
+        <article className='w-full h-56  flex flex-col items-center justify-center'>
           <h4 className='text-navy text-xl font-semibold'>Experience</h4>
           <p className='text-center text-base xl:text-lg'>With over 8 years of experience serving many different industries, Leslie&apos;s Accounting Services is the place to make your money matter.</p>
-        </section>
-        <section className='w-full h-56 flex flex-col items-center justify-center'>
+        </article>
+        <article className='w-full h-56 flex flex-col items-center justify-center'>
           <h4 className='text-navy text-xl font-semibold'>Straightforward Pricing</h4>
           <p className='text-center text-base xl:text-lg'>Here at Leslie&apos;s Accounting Services, we believe in tranparency. Here, you&apos;ll never run into any hidden fees. Pricing for our various services can be found <Link className='text-navy' href={''}>here</Link>.</p>
-        </section>
-        <section className='w-full h-56 flex flex-col items-center justify-center'>
+        </article>
+        <article className='w-full h-56 flex flex-col items-center justify-center'>
           <h4 className='text-navy text-xl font-semibold'>Client-first Service</h4>
           <p className='text-center text-base xl:text-lg'>Whether it be through exceptional customer service, flexible scheduling, or our competative pricing, you will always come first at Leslie&apos;s accounting Services.</p>
-        </section>
+        </article>
       </div>
     </section>
   )
@@ -142,7 +146,7 @@ function About() {
     <section id="about" className='bg-white w-full h-fit flex flex-col justify-center items-center scroll-mt-20 md:scroll-mt-16'>
       <h3 className='w-full h-24 flex justify-center items-center text-3xl font-light'>About Us</h3>
       <div className='w-full h-fit md:h-5/6 flex flex-col justify-center items-center'>
-        <section className='w-full md:w-5/6 h-fit md:h-3/6 flex flex-col items-center md:flex-row '>
+        <article className='w-full md:w-5/6 h-fit md:h-3/6 flex flex-col items-center md:flex-row '>
           <div className='h-52 md:h-80 w-full md:w-3/6 flex items-center relative' >
               <Image fill src="/static/images/accountant.jpeg" alt="accounting stock image" />
           </div>
@@ -150,8 +154,8 @@ function About() {
             <h4 className='w-full text-center text-navy text-xl font-semibold my-2 md:my-0'>About Leslie</h4>
             <p className='text-sm px-2'> Leslie Garcia  graduated from DeVry University with a bachelors in business administration. She then received her Masters degree from Keller Graduate University in Accounting and Finance. Leslie has successfully helped businesses get started as well as conduct their accounting. She has more than eight years of experience in the industry. She has experience working with all types of businesses such as construction, retail, food service, attorneys, stores, vendors, payroll, and more.</p>
           </div>
-        </section>
-        <section className='w-full mb-4 md:w-5/6 h-fit md:h-3/6 flex flex-col-reverse md:flex-row items-center'>
+        </article>
+        <article className='w-full mb-4 md:w-5/6 h-fit md:h-3/6 flex flex-col-reverse md:flex-row items-center'>
           <div className='h-full w-full md:w-3/6 flex flex-col justify-center items-center mb-4 md:mb-0'>
             <h4 className='w-full text-center text-navy text-xl font-semibold my-2 md:my-0'>Entrepreneurship</h4>
             <p className='text-sm px-2'>Leslie believes in entrepreneurship. Not only has she helped many start their own businesses, but she also owns her own business as well, called <Link className={`text-navy font-base underline`} href={`http://gemzandboardz.com/`} target="_blank">GemzandBoardz</Link>. With her experience, she is more than prepared to meet your business needs. Book your appointment today!</p>
@@ -161,7 +165,7 @@ function About() {
               <Image fill src="/static/images/charity.jpeg" alt="charity stock image" />
             </div>
           </div>
-        </section>
+        </article>
       </div>
     </section>
   )
@@ -169,30 +173,33 @@ function About() {
 
 function Services ({ servicePrices }: { servicePrices: Array<ServicePricing> }) {
 
-  useEffect(() => {
-    console.log(servicePrices);
-  }, []);
-
   return servicePrices.length > 0 ? 
    (
-    <section>
-      {servicePrices.map(service => (
-        <article>
-          <h4>{service.serviceName}</h4>
-
-          {service.price > 0 ?
-          <p>{service.price}</p>
-          : null}
-
-          {/* {service.subPricing ?
-          <ReactMarkdown className="prose prose-img:w-1/2 prose-img:h-auto prose-img:mx-auto">
-              {service.subPricing}
-          </ReactMarkdown>
-          : null} */}
-
-          {JSON.stringify(service.subPricing)}
-        </article>
-      ))}
+    <section className="h-fit w-full flex flex-col bg-white scroll-mt-20 md:scroll-mt-16">
+      <h4 className="w-full h-24 flex justify-center items-center text-3xl font-light px-2">Our Services</h4>
+      <article className='flex flex-col h-fit w-full px-2 md:px-16'>
+        {servicePrices.map((service) => (
+          <div key={service.serviceName} className='my-4 md:my-6 border-t md:border-t-0 md:flex md:justify-between md:w-full'>
+            <div>
+              <h5 className='text-2xl'>{service.serviceName}</h5>
+              {service.subPricing ? 
+              <ReactMarkdown className="prose max-w-none text-xs font-light text-navy prose-img:w-1/2 prose-img:h-auto prose-img:mx-auto">
+                  {service.subPricing}
+              </ReactMarkdown>
+              : null}
+            </div>
+            <div>
+              <p className='text-sm md:text-lg font-light'>${service.price}
+              {service.priceDetails ? `, ${service.priceDetails}` : null}
+              </p>
+            </div>
+          </div>
+        ))}
+      </article>
+      <article className='text-center my-6'>
+        <p className='text-sm font-bold'>Know what you&apos;re looking for? <Link className='text-navy font-base underline' target='_blank' href={`https://cal.com/${process.env.NEXT_PUBLIC_CALCOM_USERNAME}`}>Book your appointment now!</Link></p>
+        <p className='text-xs font-extralight'>You will not be charged at this time.</p>
+      </article>
     </section>
    ) : null
 }
@@ -254,12 +261,34 @@ function Services ({ servicePrices }: { servicePrices: Array<ServicePricing> }) 
 //   )
 // }
 
+export function Packages({ packages }: { packages: Array<IPackages> }) {
+  useEffect(() => {
+    console.log(packages);
+  })
+  return (
+    <section className='bg-bone h-fit w-full flex flex-row scroll-mt-20 md:scroll-mt-16'>
+      {packages.map(pack => (
+        <article>
+          <h3>{pack.title}</h3>
+          <p>{pack.desc}</p>
+          <ul>
+            {pack.includes.map(included => (
+              <li>{included}</li>
+            ))}
+          </ul>
+          <p>${pack.cost} {pack.period}</p>
+        </article>
+      ))}
+    </section>
+  )
+}
+
 export function Pricing({ pricing }: { pricing: Array<Prices> }) {
 
   return (
-    <div className="h-fit w-full flex flex-col bg-white scroll-mt-20 md:scroll-mt-16">
+    <section className="h-fit w-full flex flex-col bg-white scroll-mt-20 md:scroll-mt-16">
       <h4 className="w-full h-24 flex justify-center items-center text-3xl font-light px-2">Pricing</h4>
-      <div className='flex flex-col h-fit w-full px-2 md:px-16'>
+      <article className='flex flex-col h-fit w-full px-2 md:px-16'>
         {pricing.map((item) => (
           <div key={item.service.name} className='my-4 md:my-6 border-t md:border-t-0 md:flex md:justify-between md:w-full'>
             <div>
@@ -271,12 +300,12 @@ export function Pricing({ pricing }: { pricing: Array<Prices> }) {
             </div>
           </div>
         ))}
-      </div>
-      <div className='text-center my-6'>
+      </article>
+      <article className='text-center my-6'>
         <p className='text-sm font-bold'>Know what you&apos;re looking for? <Link className='text-navy font-base underline' target='_blank' href={`https://cal.com/${process.env.NEXT_PUBLIC_CALCOM_USERNAME}`}>Book your appointment now!</Link></p>
         <p className='text-xs font-extralight'>You will not be charged at this time.</p>
-      </div>
-    </div>
+      </article>
+    </section>
   )
 }
 
