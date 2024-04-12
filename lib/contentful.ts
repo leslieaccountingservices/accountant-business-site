@@ -169,8 +169,6 @@ export async function getPackages() {
         content_type: 'packages'
     })
 
-    console.log(JSON.stringify(packages, null, 2));
-
 
     const formatted: Array<IPackages> = packages.items.map(item => (
         {

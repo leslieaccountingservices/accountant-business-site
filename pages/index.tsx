@@ -49,8 +49,6 @@ export const getStaticProps: GetStaticProps = async () => {
 
   const packages: Array<IPackages> = await getPackages();
 
-  // console.log(pricing)
-
   return {
     props: {
       reviews,
