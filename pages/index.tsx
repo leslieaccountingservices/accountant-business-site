@@ -10,6 +10,7 @@ import * as fs from 'fs'
 import { getServicesPrices, IPackages, ServicePricing, getPackages } from '@/lib/contentful'
 import { useEffect } from 'react'
 import ReactMarkdown  from "react-markdown";
+import clsx from 'clsx'
 
 export interface IReview {
   id: string;
@@ -262,21 +263,53 @@ function Services ({ servicePrices }: { servicePrices: Array<ServicePricing> }) 
 // }
 
 export function Packages({ packages }: { packages: Array<IPackages> }) {
+
   useEffect(() => {
     console.log(packages);
-  })
+  }, []);
+
   return (
-    <section className='bg-bone h-fit w-full flex flex-row scroll-mt-20 md:scroll-mt-16'>
-      {packages.map(pack => (
-        <article>
-          <h3>{pack.title}</h3>
-          <p>{pack.desc}</p>
-          <ul>
+    <section className="relative mb-8 mt-8 max-w-2xl mx-auto pb-8 sm:mt-12 lg:max-w-8xl lg:pb-0 scroll-mt-20 md:scroll-mt-16 flex flex-col-reverse">
+      {/* <div aria-hidden="true" className="w-full hidden absolute top-4 bottom-6 inset-0 bg-white/[0.07] rounded-tl-lg rounded-tr-lg lg:block"></div> */}
+      {packages.map((pack, i) => (
+        <article className={clsx("my-4 pt-6 px-6 pb-3 rounded-lg lg:px-8 lg:pt-12", {
+          "bg-forest text-white ring-2 ring-white-800": i === 1,
+          "bg-white text-black ring-2 ring-slate-700": i !== 1
+        })}>
+          <h3 className="text-sm font-semibold uppercase tracking-wide flex justify-between gap-4 mb-5 ">{pack.title} <span className=" text-sm normal-case tracking-normal">{pack.desc}</span></h3>
+          <div className="flex flex-col items-start sm:flex-row sm:items-center sm:justify-between lg:flex-col lg:items-start">
+            <div className="mt-3 flex items-center">
+              <span className={clsx("text-slate-300 font-normal text-4xl", {
+                "text-zinc-200": i === 1,
+                "text-slate-500": i !== 1
+              })}>$</span>
+              <p className="text-5xl font-bold tracking-tight ">{pack.cost}</p>
+              <div className="ml-4">
+              <p className="text-sm ">USD</p>
+              <p className={clsx("text-sm",
+                {
+                  "text-zinc-200": i === 1,
+                  "text-slate-500": i !== 1
+                }
+              )}>Billed {pack.period}</p>
+              </div>
+            </div>
+            <a href="https://www.google.com/" className={clsx("mt-6 w-full inline-block py-2 px-8 border transition-color duration-300 border-transparent rounded-md shadow-sm text-center text-sm font-medium sm:mt-0 sm:w-auto lg:mt-6 lg:w-full", {
+              "bg-white/20 hover:bg-white/30 ": i === 1,
+              "bg-slate-400 hover:bg-slate-300": i !== 1
+            })}>Get Started</a>
+          </div>
+          <ul role="list" className="border-zinc-500 divide-zinc-500 divide-opacity-75 mt-7 border-t divide-y lg:border-t-0">
             {pack.includes.map(included => (
-              <li>{included}</li>
+              <li className={clsx("py-3 flex items-center"
+              )}>
+                <svg className="text-zinc-300 w-5 h-5 flex-shrink-0" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                  <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                </svg>
+                <span>{included}</span>
+              </li>
             ))}
           </ul>
-          <p>${pack.cost} {pack.period}</p>
         </article>
       ))}
     </section>
