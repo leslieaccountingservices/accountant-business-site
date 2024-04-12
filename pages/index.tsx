@@ -104,12 +104,11 @@ function Main({ packages, servicePrices = [], reviews = [], pricing = [] }: { pa
 
   return (
     <div className='z-10 absolute w-full h-fit inset-y-1/2 flex justify-center items-center'>
-      <main className='w-screen lg:w-4/6 h-fit bg-bone border shadow-md rounded-md'>
+      <main className='w-screen max-w-6xl lg:w-4/6 h-fit bg-bone border shadow-md rounded-md'>
         <Appeal />
         <About />
         <Services servicePrices={servicePrices} />
         <Packages packages={packages} />
-        <Pricing  pricing={pricing} />
         <Reviews reviews={reviews} />
         <Footer isHome />
       </main>
@@ -202,67 +201,12 @@ function Services ({ servicePrices }: { servicePrices: Array<ServicePricing> }) 
    ) : null
 }
 
-// function Services() {
-//   return (
-//     <section id="services" className='w-full h-fit scroll-mt-20 md:scroll-mt-16 mb-8'>
-//       <h3 className='w-full h-24 flex justify-center items-center text-3xl font-light'>Services</h3>
-//       <div className='w-full h-5/6 flex flex-col md:flex-row justify-around items-center'>
-//         <section className='w-5/6 md:w-80 h-5/6 border-2 border-forest bg-bone shadow-md rounded-md mb-4 md:mb-0'>
-//           <h4 className='w-full text-center text-navy text-xl font-semibold'>Compliance</h4>
-//           <ul className='mt-10 ml-8 text-black list-disc flex flex-col justify-between'>
-//             <li className='my-2'>Corporate Taxes</li>
-//             <li className='my-2'>Business Taxes</li>
-//             <li className='my-2'>Personal Taxes</li>
-//             <li className='my-2'>Local Sales Tax</li>
-//             <li className='my-2'>Legally Required Corporate Documentation</li>
-//           </ul>
-//         </section>
-
-//         <section className='w-5/6 md:w-80 h-5/6 border-2 border-forest bg-bone shadow-md rounded-md mb-4 md:mb-0'>
-//           <h4 className='w-full text-center text-navy text-xl font-semibold'>Management</h4>
-//           <ul className='mt-10 ml-8 text-black list-disc flex flex-col justify-between'>
-//             <li className='my-2'>Bookkeeping
-//               <ul className='list-square ml-8 mr-4 my-1'>
-//                 <li>Manage daily transactions</li>
-//               </ul>
-//             </li>
-//             <li className='my-2'>Payroll
-//               <ul className='list-square ml-8 mr-4 my-1'>
-//                 <li>Management of payroll and taxes</li>
-//               </ul>
-//             </li>
-//             <li className='my-2'>Planning
-//               <ul className='list-square ml-8 mr-4 my-1'>
-//                 <li>Reporting and advice to <span className='text-forest font-bold'>support growth</span></li>
-//               </ul>
-//             </li>
-//           </ul>
-//         </section>
-
-//         <section className='w-5/6 md:w-80 h-5/6 border-2 border-forest bg-bone shadow-md rounded-md mb-4 md:mb-0'>
-//           <h4 className='w-full text-center text-navy text-xl font-semibold'>Advisory</h4>
-//           <ul className='mt-10 ml-8 text-black list-disc flex flex-col justify-between'>
-//             <li className='my-2'>Reporting
-//               <ul className='list-square ml-8 mr-4 my-1'>
-//                 <li>Help directors make informed finance and <span className='text-forest font-bold'>accounting decisions</span></li>
-//               </ul>
-//             </li>
-//             <li className='my-2'>Quick Books Training
-//               <ul className='list-square ml-8 mr-4 my-1'>
-//                 <li><span className='text-forest font-bold'>Training</span> in a one-on-one setting or group setting</li>
-//               </ul>
-//             </li>
-//           </ul>
-//         </section>
-//       </div>
-//     </section>
-//   )
-// }
-
 export function Packages({ packages }: { packages: Array<IPackages> }) {
 
-  return (
-    <section className="relative mb-8 mt-8 max-w-2xl mx-auto pb-8 sm:mt-12 lg:max-w-8xl lg:pb-0 scroll-mt-20 md:scroll-mt-16 flex flex-col-reverse">
+  return packages.length > 0 ? (
+    <>
+    <h4 className='w-full h-24 -mb-4 flex justify-center items-center text-3xl font-light'>Packages</h4>
+    <section className="relative mb-8 mt-4 max-w-2xl mx-auto pb-8 sm:mt-12 lg:max-w-8xl lg:pb-0 scroll-mt-20 md:scroll-mt-16 flex flex-col-reverse">
       {/* <div aria-hidden="true" className="w-full hidden absolute top-4 bottom-6 inset-0 bg-white/[0.07] rounded-tl-lg rounded-tr-lg lg:block"></div> */}
       {packages.map((pack, i) => (
         <article key={pack.title} className={clsx("my-4 pt-6 px-6 pb-3 rounded-lg lg:px-8 lg:pt-12", {
@@ -306,39 +250,40 @@ export function Packages({ packages }: { packages: Array<IPackages> }) {
         </article>
       ))}
     </section>
-  )
+    </>
+  ) : null
 }
 
-export function Pricing({ pricing }: { pricing: Array<Prices> }) {
+// export function Pricing({ pricing }: { pricing: Array<Prices> }) {
 
-  return (
-    <section className="h-fit w-full flex flex-col bg-white scroll-mt-20 md:scroll-mt-16">
-      <h4 className="w-full h-24 flex justify-center items-center text-3xl font-light px-2">Pricing</h4>
-      <article className='flex flex-col h-fit w-full px-2 md:px-16'>
-        {pricing.map((item) => (
-          <div key={item.service.name} className='my-4 md:my-6 border-t md:border-t-0 md:flex md:justify-between md:w-full'>
-            <div>
-              <h5 className='text-2xl'>{item.service.name}</h5>
-              <p className='text-xs font-light text-navy'>{item.service.details}</p>
-            </div>
-            <div>
-              <p className='text-sm md:text-lg font-light'>${item.pricing.price} {item.pricing.details}</p>
-            </div>
-          </div>
-        ))}
-      </article>
-      <article className='text-center my-6'>
-        <p className='text-sm font-bold'>Know what you&apos;re looking for? <Link className='text-navy font-base underline' target='_blank' href={`https://cal.com/${process.env.NEXT_PUBLIC_CALCOM_USERNAME}`}>Book your appointment now!</Link></p>
-        <p className='text-xs font-extralight'>You will not be charged at this time.</p>
-      </article>
-    </section>
-  )
-}
+//   return (
+//     <section className="h-fit w-full flex flex-col bg-white scroll-mt-20 md:scroll-mt-16">
+//       <h4 className="w-full h-24 flex justify-center items-center text-3xl font-light px-2">Pricing</h4>
+//       <article className='flex flex-col h-fit w-full px-2 md:px-16'>
+//         {pricing.map((item) => (
+//           <div key={item.service.name} className='my-4 md:my-6 border-t md:border-t-0 md:flex md:justify-between md:w-full'>
+//             <div>
+//               <h5 className='text-2xl'>{item.service.name}</h5>
+//               <p className='text-xs font-light text-navy'>{item.service.details}</p>
+//             </div>
+//             <div>
+//               <p className='text-sm md:text-lg font-light'>${item.pricing.price} {item.pricing.details}</p>
+//             </div>
+//           </div>
+//         ))}
+//       </article>
+//       <article className='text-center my-6'>
+//         <p className='text-sm font-bold'>Know what you&apos;re looking for? <Link className='text-navy font-base underline' target='_blank' href={`https://cal.com/${process.env.NEXT_PUBLIC_CALCOM_USERNAME}`}>Book your appointment now!</Link></p>
+//         <p className='text-xs font-extralight'>You will not be charged at this time.</p>
+//       </article>
+//     </section>
+//   )
+// }
 
 export function Reviews({ reviews }: { reviews: IReview[] }) {
   return (
-    <section id="reviews" className='h-fit w-full flex flex-col bg-bone scroll-mt-20 md:scroll-mt-16'>
-      <h4  className='w-full h-24 flex justify-center items-center text-3xl font-light'>Reviews</h4>
+    <section id="reviews" className='h-fit w-full flex flex-col bg-white scroll-mt-20 md:scroll-mt-16'>
+      <h4 className='w-full h-24 flex justify-center items-center text-3xl font-light'>Reviews</h4>
       <div className='w-full h-fit flex flex-col justify-start items-center'>
         {reviews.map((review: IReview) => (
           <Review key={review.id} review={review} />
