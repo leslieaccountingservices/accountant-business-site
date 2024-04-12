@@ -8,8 +8,7 @@ import MetaTags from '@/components/MetaTags'
 import { GetStaticProps } from 'next'
 import * as fs from 'fs'
 import { getServicesPrices, IPackages, ServicePricing, getPackages } from '@/lib/contentful'
-import { useEffect } from 'react'
-import ReactMarkdown  from "react-markdown";
+import ReactMarkdown  from "react-markdown"
 import clsx from 'clsx'
 
 export interface IReview {
@@ -264,15 +263,11 @@ function Services ({ servicePrices }: { servicePrices: Array<ServicePricing> }) 
 
 export function Packages({ packages }: { packages: Array<IPackages> }) {
 
-  useEffect(() => {
-    console.log(packages);
-  }, []);
-
   return (
     <section className="relative mb-8 mt-8 max-w-2xl mx-auto pb-8 sm:mt-12 lg:max-w-8xl lg:pb-0 scroll-mt-20 md:scroll-mt-16 flex flex-col-reverse">
       {/* <div aria-hidden="true" className="w-full hidden absolute top-4 bottom-6 inset-0 bg-white/[0.07] rounded-tl-lg rounded-tr-lg lg:block"></div> */}
       {packages.map((pack, i) => (
-        <article className={clsx("my-4 pt-6 px-6 pb-3 rounded-lg lg:px-8 lg:pt-12", {
+        <article key={pack.title} className={clsx("my-4 pt-6 px-6 pb-3 rounded-lg lg:px-8 lg:pt-12", {
           "bg-forest text-white ring-2 ring-white-800": i === 1,
           "bg-white text-black ring-2 ring-slate-700": i !== 1
         })}>
@@ -301,7 +296,7 @@ export function Packages({ packages }: { packages: Array<IPackages> }) {
           </div>
           <ul role="list" className="border-zinc-500 divide-zinc-500 divide-opacity-75 mt-7 border-t divide-y lg:border-t-0">
             {pack.includes.map(included => (
-              <li className={clsx("py-3 flex items-center"
+              <li key={included} className={clsx("py-3 flex items-center"
               )}>
                 <svg className="text-zinc-300 w-5 h-5 flex-shrink-0" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
                   <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
