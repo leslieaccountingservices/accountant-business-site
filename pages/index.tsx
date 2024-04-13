@@ -185,11 +185,13 @@ function Services ({ servicePrices }: { servicePrices: Array<ServicePricing> }) 
               </ReactMarkdown>
               : null}
             </div>
-            <div>
-              <p className='text-sm md:text-lg font-light'>${service.price}
-              {service.priceDetails ? `, ${service.priceDetails}` : null}
-              </p>
-            </div>
+            {service.price > 0 ? 
+            <p className='text-sm md:text-lg font-light'>${service.price}
+            {service.priceDetails ? `, ${service.priceDetails}` : null}
+            </p>
+            :
+            <p className='text-sm md:text-lg font-light'>Varies</p>
+            }
           </div>
         ))}
       </article>
@@ -231,10 +233,10 @@ export function Packages({ packages }: { packages: Array<IPackages> }) {
               )}>Billed {pack.period}</p>
               </div>
             </div>
-            <a href="https://www.google.com/" className={clsx("mt-6 w-full inline-block py-2 px-8 border transition-color duration-300 border-transparent rounded-md shadow-sm text-center text-sm font-medium sm:mt-0 sm:w-auto lg:mt-6 lg:w-full", {
+            <Link target="_blank" href={pack.link ? pack.link : `https://cal.com/${process.env.NEXT_PUBLIC_CALCOM_USERNAME}/free-consultation`} className={clsx("mt-6 w-full inline-block py-2 px-8 border transition-color duration-300 border-transparent rounded-md shadow-sm text-center text-sm font-medium sm:mt-0 sm:w-auto lg:mt-6 lg:w-full", {
               "bg-white/20 hover:bg-white/30 ": i === 1,
               "bg-slate-400 hover:bg-slate-300": i !== 1
-            })}>Get Started</a>
+            })}>Get Started</Link>
           </div>
           <ul role="list" className="border-zinc-500 divide-zinc-500 divide-opacity-75 mt-7 border-t divide-y lg:border-t-0">
             {pack.includes.map(included => (

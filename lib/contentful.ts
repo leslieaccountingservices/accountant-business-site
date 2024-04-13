@@ -39,7 +39,8 @@ export interface IPackages {
     cost: number;
     period: string,
     desc: string | null,
-    includes: Array<string | null>
+    includes: Array<string | null>,
+    link: string | null
 }
 
 export async function getPaths() {
@@ -176,7 +177,8 @@ export async function getPackages() {
             cost: (item.fields as any).cost as number,
             period: (item.fields as any).payPeriod as string,
             desc: (item.fields as any).description as string,
-            includes: (item.fields as any).includes as Array<string | null>
+            includes: (item.fields as any).includes as Array<string | null>,
+            link: (item.fields as any).link as string || null
         }
     ))
 
